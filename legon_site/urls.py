@@ -15,11 +15,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from farm.views import home, generate_pdf_report
+from django.contrib.admin import views
+from django.urls import include, path
+from farm.views import home, generate_pdf_report, verify_payment  # <-- Make sure all views are imported
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
     path('', home, name='home'),
-    path('download-report/', generate_pdf_report, name='download_pdf'),
+    path('', include('farm.urls')),
+    path('download-report/', generate_pdf_report, name='download_pdf'),  # <-- This line maps 'download_pdf'!
+    path('verify-payment/<int:order_id>/', verify_payment, name='verify_payment'),  # MoMo Callback
 ]
