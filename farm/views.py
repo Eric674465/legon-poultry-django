@@ -91,7 +91,7 @@ def home(request):
             "metric": metric,
             "progress_percent": progress_percent
         }
-        return render(request, "farm/index.html", context)
+        return render(request, "pdf_report.html", context)
 
     except Exception as e:
         # Prints exact traceback in Render logs and on screen for debugging
