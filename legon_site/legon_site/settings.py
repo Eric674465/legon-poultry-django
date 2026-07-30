@@ -13,7 +13,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security configuration (Reads from Render environment variables in production, falls back locally)
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-%57d-k1^%pz%#t_6wmo+jy96!q*3bd+-)bz9vyj1j-(h0k3gj1')
-DEBUG = os.environ.get('DEBUG', 'True').lower() in ['true', '1', 'yes']
+DEBUG = True
 
 # Allow all hosts and explicit Render domains
 ALLOWED_HOSTS = ['*', 'legon-poultry-django.onrender.com', '.onrender.com', '127.0.0.1', 'localhost']
