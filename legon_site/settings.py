@@ -48,7 +48,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'farm' / 'templates',  # Direct path to farm templates
+            BASE_DIR / 'farm' / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
