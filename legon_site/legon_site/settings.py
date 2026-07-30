@@ -15,7 +15,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-%57d-k1^%pz%#t_6wmo+jy96!q*3bd+-)bz9vyj1j-(h0k3gj1')
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']  # Render will attach its own domain
+ALLOWED_HOSTS = [ '*' ] 
 
 
 # Application definition
