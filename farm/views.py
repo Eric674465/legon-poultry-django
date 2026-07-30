@@ -91,7 +91,8 @@ def home(request):
             "metric": metric,
             "progress_percent": progress_percent
         }
-        return render(request, "pdf_report.html", context)
+        return render(request, "index.html", context)
+        html_string = render_to_string("pdf_report.html", {"metric": metric})
 
     except Exception as e:
         # Prints exact traceback in Render logs and on screen for debugging
