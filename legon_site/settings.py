@@ -47,7 +47,9 @@ ROOT_URLCONF = 'legon_site.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'farm' / 'templates'], # Force Django to look here
+        'DIRS': [
+            BASE_DIR / 'farm' / 'templates',  # Direct path to farm templates
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
