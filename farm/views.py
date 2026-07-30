@@ -1,6 +1,7 @@
 import os
 import json
 import requests
+import traceback
 from io import BytesIO
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
@@ -17,84 +18,94 @@ PAYSTACK_SECRET_KEY = os.environ.get(
 )
 
 def home(request):
-    metric = BatchMetric.objects.first()
-    
-    # Calculate progress percentage safely without crashing if metric is None
-    if metric and metric.total_weeks:
-        progress_percent = int((metric.current_week / metric.total_weeks) * 100)
-    else:
-        progress_percent = 57
-
-    if request.method == "POST":
-        buyer_name = request.POST.get("buyer_name")
-        phone_number = request.POST.get("phone_number")
-        quantity_str = request.POST.get("quantity", "50")
-        notes = request.POST.get("notes", "")
-
-        try:
-            quantity = int(quantity_str)
-        except ValueError:
-            quantity = 50
-
-        # Calculate deposit amount (e.g., GHS 10 per bird deposit)
-        deposit_amount_ghs = quantity * 10 
-
-        # 1. Save pending order to Database
-        order = PreOrder.objects.create(
-            buyer_name=buyer_name,
-            phone_number=phone_number,
-            quantity=quantity,
-            notes=notes,
-            amount_paid=deposit_amount_ghs,
-            payment_status="PENDING"
-        )
-
-        # 2. Dynamically build callback URL (works on localhost AND live Render URL)
-        callback_url = request.build_absolute_uri(
-            reverse('verify_payment', kwargs={'order_id': order.id})
-        )
-
-        # 3. Initialize Paystack Mobile Money Transaction
-        paystack_url = "https://api.paystack.co/transaction/initialize"
-        headers = {
-            "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
-            "Content-Type": "application/json"
-        }
+    try:
+        # Fetch initial batch metric record safely
+        metric = BatchMetric.objects.first()
         
-        # Paystack expects amount in pesewas (1 GHS = 100 pesewas)
-        payload = {
-            "email": f"buyer_{order.id}@legonpoultry.com",  # Placeholder email for MoMo
-            "amount": int(deposit_amount_ghs * 100),
-            "currency": "GHS",
-            "callback_url": callback_url,
-            "metadata": {
-                "buyer_name": buyer_name,
-                "phone_number": phone_number,
-                "order_id": order.id
-            }
-        }
+        # Calculate progress percentage safely without crashing if metric is None
+        if metric and metric.total_weeks:
+            progress_percent = int((metric.current_week / metric.total_weeks) * 100)
+        else:
+            progress_percent = 57
 
-        try:
+        if request.method == "POST":
+            buyer_name = request.POST.get("buyer_name")
+            phone_number = request.POST.get("phone_number")
+            quantity_str = request.POST.get("quantity", "50")
+            notes = request.POST.get("notes", "")
+
+            try:
+                quantity = int(quantity_str)
+            except ValueError:
+                quantity = 50
+
+            # Deposit calculation (e.g., GHS 10 per bird deposit)
+            deposit_amount_ghs = quantity * 10 
+
+            # 1. Save pending order to Database
+            order = PreOrder.objects.create(
+                buyer_name=buyer_name,
+                phone_number=phone_number,
+                quantity=quantity,
+                notes=notes,
+                amount_paid=deposit_amount_ghs,
+                payment_status="PENDING"
+            )
+
+            # 2. Dynamic callback URL (works on localhost & live Render URL)
+            callback_url = request.build_absolute_uri(
+                reverse('verify_payment', kwargs={'order_id': order.id})
+            )
+
+            # 3. Initialize Paystack Mobile Money Transaction
+            paystack_url = "https://api.paystack.co/transaction/initialize"
+            headers = {
+                "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
+                "Content-Type": "application/json"
+            }
+            
+            payload = {
+                "email": f"buyer_{order.id}@legonpoultry.com",
+                "amount": int(deposit_amount_ghs * 100),  # Amount in pesewas
+                "currency": "GHS",
+                "callback_url": callback_url,
+                "metadata": {
+                    "buyer_name": buyer_name,
+                    "phone_number": phone_number,
+                    "order_id": order.id
+                }
+            }
+
             response = requests.post(paystack_url, headers=headers, json=payload, timeout=10)
             res_data = response.json()
             
             if res_data.get("status"):
                 order.paystack_ref = res_data["data"]["reference"]
                 order.save()
-                # Redirect buyer to Paystack MoMo Payment Page
                 return redirect(res_data["data"]["authorization_url"])
             else:
                 messages.error(request, f"Paystack Error: {res_data.get('message', 'Failed to initialize payment.')}")
-        except Exception as e:
-            messages.error(request, f"MoMo Gateway Connection Error: {str(e)}")
+                return redirect("home")
 
-        return redirect("home")
+        context = {
+            "metric": metric,
+            "progress_percent": progress_percent
+        }
+        return render(request, "index.html", context)
 
-    context = {
-        "metric": metric,
-        "progress_percent": progress_percent
-    }
-    return render(request, "index.html", context)
+    except Exception as e:
+        # Prints exact traceback in Render logs and on screen for debugging
+        print("=" * 50)
+        print("HOMEPAGE ERROR TRACEBACK:")
+        traceback.print_exc()
+        print("=" * 50)
+        return HttpResponse(
+            f"<div style='padding:20px; font-family:sans-serif;'>"
+            f"<h2 style='color:#dc2626;'>Homepage Render Exception</h2>"
+            f"<pre style='background:#f3f4f6; padding:15px; border-radius:8px;'>{traceback.format_exc()}</pre>"
+            f"</div>", 
+            status=500
+        )
 
 
 # --- PAYSTACK MOMO VERIFICATION VIEW ---
