@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: Helvetica, Arial, sans-serif; padding: 30px; color: #1a1a1a; }
+    h1 { color: #153e2b; border-bottom: 2px solid #153e2b; padding-bottom: 10px; }
+    .header-info { margin-bottom: 20px; font-size: 14px; color: #555; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #dddddd; text-align: left; padding: 10px; font-size: 13px; }
+    th { background-color: #e8f5ed; color: #153e2b; }
+    .footer { margin-top: 40px; font-size: 11px; text-align: center; color: #888; }
+  </style>
+</head>
+<body>
+
+  <h1>UG Legon Commercial Broiler Facility</h1>
+  <div class="header-info">
+    <p><strong>Project Location:</strong> University of Ghana, Legon Campus (2 Hectares)</p>
+    <p><strong>System Type:</strong> All-in / All-out Commercial Production</p>
+    <p><strong>Report Date:</strong> {% now "F j, Y" %}</p>
+  </div>
+
+  <h2>Technical Specifications</h2>
+  <table>
+    <tr><th>Parameter</th><th>Specification Details</th></tr>
+    <tr><td>Flock Capacity</td><td>10,000 Birds per Batch</td></tr>
+    <tr><td>Cycle Duration</td><td>6–7 Weeks</td></tr>
+    <tr><td>Target Weight</td><td>2.0 – 2.5 kg</td></tr>
+    <tr><td>Site Suitability</td><td>Optimal topography, reliable water supply, ideal wind orientation</td></tr>
+    <tr><td>Biosecurity Status</td><td>Strict vehicular sanitation dip & access logbook active</td></tr>
+  </table>
+
+  <h2>Current Batch Metrics</h2>
+  <table>
+    <tr><th>Active Batch</th><td>{{ metric.batch_name }}</td></tr>
+    <tr><th>Current Growth Phase</th><td>Week {{ metric.current_week }} of {{ metric.total_weeks }}</td></tr>
+    <tr><th>Mortality Count</th><td>{{ metric.mortality_count }} birds</td></tr>
+  </table>
+
+  <div class="footer">
+    <p>Generated automatically via UG Legon Broiler Portal System</p>
+  </div>
+
+</body>
+</html>

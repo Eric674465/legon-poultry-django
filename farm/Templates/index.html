@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UG Legon Commercial Broiler Facility</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            legon: { dark: '#153e2b', primary: '#226f49', light: '#e8f5ed', accent: '#f59e0b' }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <div class="bg-legon-dark text-white font-black px-3 py-1.5 rounded-lg text-lg tracking-wider">UG LEGON</div>
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest hidden sm:inline">Poultry Facility</span>
+      </div>
+      <nav class="hidden md:flex space-x-8 font-semibold text-sm text-slate-600">
+        <a href="#hero" class="hover:text-legon-primary transition">Home</a>
+        <a href="#specs" class="hover:text-legon-primary transition">Specifications</a>
+        <a href="#calculator" class="hover:text-legon-primary transition">Yield Engine</a>
+        <a href="#operations" class="hover:text-legon-primary transition">Operations</a>
+        <a href="#preorder" class="hover:text-legon-primary transition">Pre-Order</a>
+      </nav>
+      <a href="#preorder" class="bg-legon-primary text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-legon-dark transition shadow-sm">
+        Pre-Order Batch
+      </a>
+    </div>
+  </header>
+
+  <section id="hero" class="max-w-7xl mx-auto px-6 pt-6">
+    <div class="bg-gradient-to-r from-legon-dark to-legon-primary rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between">
+      <div class="z-10 max-w-xl space-y-4">
+        <span class="bg-white/10 backdrop-blur-md text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-white/20">
+          Academic Project & Agribusiness Design
+        </span>
+        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+          Commercial Broiler Facility at UG Legon
+        </h1>
+        <p class="text-slate-200 text-sm md:text-base leading-relaxed">
+          Preliminary design for a 10,000-bird capacity poultry facility across 2 hectares. Optimized for biosecurity, reliable water supply, and ideal wind orientation.
+        </p>
+        <div class="pt-2 flex flex-wrap gap-4">
+          <a href="#preorder" class="bg-amber-400 text-slate-900 font-bold text-sm px-6 py-3 rounded-full hover:bg-amber-300 transition shadow-md">
+            Reserve Wholesale Broilers
+          </a>
+          <a href="{% url 'download_pdf' %}" class="bg-white/10 border border-white/30 text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/20 transition flex items-center gap-2">
+            <span>📄 Download Technical Proposal PDF</span>
+          </a>
+        </div>
+      </div>
+      <div class="mt-8 md:mt-0 z-10 bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl text-center min-w-[240px]">
+        <span class="text-xs uppercase font-bold text-amber-300 tracking-wider">Current Harvest Batch</span>
+        <div class="text-4xl font-extrabold my-2">10,000</div>
+        <span class="text-xs text-slate-200">Broilers (All-in / All-out System)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs" class="max-w-7xl mx-auto px-6 py-8">
+    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="space-y-1 border-r border-slate-100 last:border-0">
+        <div class="text-2xl font-black text-legon-primary">2.0 Ha</div>
+        <div class="text-xs font-semibold text-slate-500 uppercase">Site Area</div>
+      </div>
+      <div class="space-y-1 border-r border-slate-100 last:border-0">
+        <div class="text-2xl font-black text-legon-primary">6–7 Wks</div>
+        <div class="text-xs font-semibold text-slate-500 uppercase">Production Cycle</div>
+      </div>
+      <div class="space-y-1 border-r border-slate-100 last:border-0">
+        <div class="text-2xl font-black text-legon-primary">2.0–2.5 kg</div>
+        <div class="text-xs font-semibold text-slate-500 uppercase">Target Weight</div>
+      </div>
+      <div class="space-y-1">
+        <div class="text-2xl font-black text-legon-primary">100%</div>
+        <div class="text-xs font-semibold text-slate-500 uppercase">Biosecure Setup</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="calculator" class="max-w-7xl mx-auto px-6 py-6">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">Interactive Yield Calculator</h2>
+        <p class="text-sm text-slate-600 mb-6">Simulate total feed input requirements and harvest output weight depending on flock volume.</p>
+        
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Flock Size (Birds)</label>
+            <input type="number" id="flockInput" value="10000" step="500" min="100" class="w-full border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-legon-primary focus:outline-none">
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-legon-light border border-emerald-200 rounded-xl p-6 space-y-4">
+        <h3 class="text-sm font-bold text-legon-dark uppercase tracking-wider">Engine Results</h3>
+        <div class="flex justify-between items-center border-b border-emerald-200/60 pb-3">
+          <span class="text-sm text-slate-600">Estimated Total Feed:</span>
+          <span id="feedResult" class="text-lg font-bold text-legon-primary">33,000 kg</span>
+        </div>
+        <div class="flex justify-between items-center border-b border-emerald-200/60 pb-3">
+          <span class="text-sm text-slate-600">Estimated Meat Output:</span>
+          <span id="yieldResult" class="text-lg font-bold text-legon-primary">22,500 kg</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-sm text-slate-600">Production Model:</span>
+          <span class="text-xs font-bold bg-legon-primary text-white px-2.5 py-1 rounded-md">All-in / All-out</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="operations" class="max-w-7xl mx-auto px-6 py-6 space-y-6">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+      <h2 class="text-2xl font-bold text-slate-900 mb-1">Operations Dashboard</h2>
+      <p class="text-sm text-slate-500 mb-6">Active Batch Status & Biosecurity Compliance Monitor</p>
+
+      <div class="space-y-4">
+        <div class="flex justify-between text-sm font-bold">
+          <span>Batch Growth Progress ({{ metric.batch_name|default:"Batch #2026-A" }})</span>
+          <span class="text-legon-primary">{{ metric.current_week|default:4 }} of {{ metric.total_weeks|default:7 }} Weeks ({{ progress_percent }}%)</span>
+        </div>
+        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden p-0.5 border border-slate-200">
+          <div class="bg-legon-primary h-full rounded-full transition-all duration-500" style="width: {{ progress_percent }}%;"></div>
+        </div>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-slate-100">
+        <h3 class="text-lg font-bold text-slate-800 mb-1">Flock Growth & FCR Progression Chart</h3>
+        <p class="text-xs text-slate-500 mb-4">Targeting 2.0–2.5 kg market weight across the 7-week cycle</p>
+        
+        <div class="w-full h-64 md:h-80">
+          <canvas id="growthChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="preorder" class="max-w-7xl mx-auto px-6 py-6 mb-12">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2 text-center">Wholesale Pre-Order Portal</h2>
+      <p class="text-sm text-slate-500 mb-6 text-center">Reserve live broilers with Mobile Money deposit (MTN MoMo / Telecel Cash).</p>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm p-4 rounded-xl mb-6 font-semibold">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="POST" class="space-y-4">
+        {% csrf_token %}
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Buyer / Restaurant Name</label>
+          <input type="text" name="buyer_name" required placeholder="e.g. Accra Central Restaurant" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-legon-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone / MoMo Number</label>
+          <input type="text" name="phone_number" required placeholder="024 XXX XXXX" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-legon-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Quantity (Minimum 50 birds)</label>
+          <input type="number" name="quantity" min="50" value="50" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-legon-primary focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Additional Notes (Optional)</label>
+          <textarea name="notes" rows="3" placeholder="Specify preferred pickup or delivery dates..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-legon-primary focus:outline-none"></textarea>
+        </div>
+
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-xl flex items-center justify-between text-xs font-bold text-amber-900">
+          <span>Supported Payment Channels:</span>
+          <span class="bg-amber-400 text-slate-900 px-2.5 py-1 rounded-md">MTN MoMo / Telecel Cash / Card</span>
+        </div>
+
+        <button type="submit" class="w-full bg-legon-primary text-white font-bold py-3.5 rounded-xl hover:bg-legon-dark transition shadow-md flex items-center justify-center gap-2">
+          <span>Pay Deposit via Mobile Money</span>
+          <span>💳</span>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    // 1. Yield Calculator Logic
+    const flockInput = document.getElementById('flockInput');
+    const feedResult = document.getElementById('feedResult');
+    const yieldResult = document.getElementById('yieldResult');
+
+    flockInput.addEventListener('input', () => {
+      const val = parseFloat(flockInput.value) || 0;
+      feedResult.textContent = (val * 3.3).toLocaleString() + ' kg';
+      yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg';
+    });
+
+    // 2. Chart.js Analytics Configuration
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4 (Current)', 'Week 5', 'Week 6', 'Week 7'],
+        datasets: [
+          {
+            label: 'Target Weight (kg)',
+            data: [0.18, 0.45, 0.85, 1.45, 1.95, 2.30, 2.50],
+            borderColor: '#153e2b',
+            backgroundColor: 'rgba(21, 62, 43, 0.08)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 3
+          },
+          {
+            label: 'FCR (Feed Conversion Ratio)',
+            data: [0.9, 1.1, 1.3, 1.45, 1.6, 1.75, 1.85],
+            borderColor: '#f59e0b',
+            borderDash: [5, 5],
+            tension: 0.2,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
