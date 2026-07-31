@@ -7,7 +7,7 @@ class Post(models.Model):
     author = models.CharField(max_length=100, default="UG Legon Poultry Team")
     summary = models.TextField(max_length=300, help_text="Short preview snippet for card display")
     content = models.TextField()
-    cover_image_url = models.URLField(blank=True, null=True, help_text="Image link or Unsplash URL")
+    cover_image_url = models.URLField(blank=True, null=True, help_text="Image link or Pexels URL")
     created_at = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=True)
 
