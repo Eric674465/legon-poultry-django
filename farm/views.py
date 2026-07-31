@@ -1,5 +1,4 @@
 import os
-import json
 import requests
 import traceback
 from io import BytesIO
@@ -10,15 +9,12 @@ from django.contrib import messages
 from django.urls import reverse
 from xhtml2pdf import pisa
 from .models import PreOrder, BatchMetric
-from blog.models import Post  # 👈 Imported Post model to serve blog posts on home page
 
-# Safe import for blog Post model
 try:
     from blog.models import Post
-except ModuleNotFoundError:
+except Exception:
     Post = None
 
-# 🔑 Reads from Render environment variables in production, falls back to local test key
 PAYSTACK_SECRET_KEY = os.environ.get(
     "PAYSTACK_SECRET_KEY", 
     "sk_test_0a4180007b1451128c9b7553529c94d437ff0648"
@@ -26,17 +22,19 @@ PAYSTACK_SECRET_KEY = os.environ.get(
 
 def home(request):
     try:
-        # Fetch initial batch metric record safely
         metric = BatchMetric.objects.first()
         
-        # Calculate progress percentage safely without crashing if metric is None
         if metric and metric.total_weeks:
             progress_percent = int((metric.current_week / metric.total_weeks) * 100)
         else:
             progress_percent = 57
 
-        # Fetch latest 3 published blog posts safely
-        recent_posts = Post.objects.filter(is_published=True).order_by('-created_at')[:3]
+        recent_posts = []
+        if Post:
+            try:
+                recent_posts = Post.objects.filter(is_published=True).order_by('-created_at')[:3]
+            except Exception:
+                recent_posts = []
 
         if request.method == "POST":
             buyer_name = request.POST.get("buyer_name")
@@ -49,10 +47,8 @@ def home(request):
             except ValueError:
                 quantity = 50
 
-            # Deposit calculation (e.g., GHS 10 per bird deposit)
             deposit_amount_ghs = quantity * 10 
 
-            # 1. Save pending order to Database
             order = PreOrder.objects.create(
                 buyer_name=buyer_name,
                 phone_number=phone_number,
@@ -62,12 +58,10 @@ def home(request):
                 payment_status="PENDING"
             )
 
-            # 2. Dynamic callback URL (works on localhost & live Render URL)
             callback_url = request.build_absolute_uri(
                 reverse('verify_payment', kwargs={'order_id': order.id})
             )
 
-            # 3. Initialize Paystack Mobile Money Transaction
             paystack_url = "https://api.paystack.co/transaction/initialize"
             headers = {
                 "Authorization": f"Bearer {PAYSTACK_SECRET_KEY}",
@@ -76,7 +70,7 @@ def home(request):
             
             payload = {
                 "email": f"buyer_{order.id}@legonpoultry.com",
-                "amount": int(deposit_amount_ghs * 100),  # Amount in pesewas
+                "amount": int(deposit_amount_ghs * 100),
                 "currency": "GHS",
                 "callback_url": callback_url,
                 "metadata": {
@@ -100,12 +94,11 @@ def home(request):
         context = {
             "metric": metric,
             "progress_percent": progress_percent,
-            "recent_posts": recent_posts  # 👈 Passed to index.html context
+            "recent_posts": recent_posts
         }
         return render(request, "index.html", context)
 
     except Exception as e:
-        # Prints exact traceback in Render logs and on screen for debugging
         print("=" * 50)
         print("HOMEPAGE ERROR TRACEBACK:")
         traceback.print_exc()
@@ -118,8 +111,6 @@ def home(request):
             status=500
         )
 
-
-# --- PAYSTACK MOMO VERIFICATION VIEW ---
 def verify_payment(request, order_id):
     order = get_object_or_404(PreOrder, id=order_id)
     reference = request.GET.get('reference')
@@ -145,8 +136,6 @@ def verify_payment(request, order_id):
 
     return redirect("home")
 
-
-# --- PDF GENERATOR VIEW ---
 def generate_pdf_report(request):
     metric = BatchMetric.objects.first()
     html_string = render_to_string('pdf_report.html', {'metric': metric})

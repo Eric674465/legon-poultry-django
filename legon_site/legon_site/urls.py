@@ -21,4 +21,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('farm.urls')),  # Directs homepage requests to the farm app
     path('inventory/', include('inventory.urls')),  # 👈 Route to new app
+    path('blog/', include('blog.urls')),
 ]
