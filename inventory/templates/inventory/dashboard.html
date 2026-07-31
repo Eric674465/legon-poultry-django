@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farm Inventory & Daily Logs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 p-6">
+
+  <div class="max-w-7xl mx-auto space-y-6">
+
+    <div class="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+      <div>
+        <h1 class="text-2xl font-bold text-slate-900">Farm Inventory & Analytics</h1>
+        <p class="text-xs text-slate-500">Active Batch: {{ active_batch.batch_name|default:"Batch #2026-A" }}</p>
+      </div>
+      <a href="/" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition">
+        ← Back to Main Website
+      </a>
+    </div>
+
+    {% if low_stock_alerts %}
+      <div class="bg-red-50 border border-red-200 text-red-800 p-4 rounded-xl">
+        <h3 class="text-sm font-bold flex items-center gap-2">🚨 Low Stock Warning!</h3>
+        <ul class="list-disc ml-5 text-xs mt-1">
+          {% for alert in low_stock_alerts %}
+            <li><b>{{ alert.get_feed_type_display }}</b> has only <b>{{ alert.bags_in_stock }} bags</b> left (Threshold: {{ alert.reorder_threshold }}).</li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    <div class="grid md:grid-cols-3 gap-6">
+      
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <span class="text-xs uppercase font-bold text-slate-400">Calculated FCR</span>
+        <div class="text-3xl font-black text-emerald-600 my-2">{{ fcr }}</div>
+        <p class="text-[11px] text-slate-500">Target Benchmark: 1.60 – 1.70</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <span class="text-xs uppercase font-bold text-slate-400">Total Mortality</span>
+        <div class="text-3xl font-black text-rose-600 my-2">{{ total_mortality }} Birds</div>
+        <p class="text-[11px] text-slate-500">Cumulative for current cycle</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+        <span class="text-xs uppercase font-bold text-slate-400">Feed Stock Status</span>
+        <div class="mt-2 space-y-1">
+          {% for feed in feed_stocks %}
+            <div class="flex justify-between text-xs font-semibold">
+              <span>{{ feed.get_feed_type_display }}:</span>
+              <span class="{% if feed.bags_in_stock <= feed.reorder_threshold %}text-red-600 font-bold{% else %}text-slate-700{% endif %}">
+                {{ feed.bags_in_stock }} Bags
+              </span>
+            </div>
+          {% empty %}
+            <p class="text-xs text-slate-400">No stock configured in Admin.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+      <h2 class="text-lg font-bold text-slate-900 mb-4">📱 Record Daily Farm Activity</h2>
+
+      {% if messages %}
+        {% for message in messages %}
+          <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs p-3 rounded-xl mb-4 font-semibold">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <form method="POST" class="grid md:grid-cols-3 gap-4">
+        {% csrf_token %}
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Date</label>
+          <input type="date" name="date" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Feed Consumed (Bags)</label>
+          <input type="number" step="0.1" name="feed_consumed_bags" required placeholder="e.g. 12.5" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Water Consumed (Liters)</label>
+          <input type="number" step="1" name="water_consumed_liters" required placeholder="e.g. 1200" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mortality Count</label>
+          <input type="number" name="mortality_count" value="0" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Average Bird Weight (kg)</label>
+          <input type="number" step="0.01" name="average_weight_kg" placeholder="e.g. 1.45" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes / Observations</label>
+          <input type="text" name="notes" placeholder="e.g. Vaccination given..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
+        </div>
+
+        <button type="submit" class="md:col-span-3 bg-emerald-700 text-white font-bold py-3 rounded-xl hover:bg-emerald-800 transition">
+          Submit Daily Log
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+</body>
+</html>

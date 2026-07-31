@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'farm',  # Your farm app
+    'inventory',  # Your inventory app
 ]
 
 MIDDLEWARE = [
