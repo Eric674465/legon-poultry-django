@@ -3,116 +3,332 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Farm Inventory & Daily Logs</title>
+  <title>UG Legon Poultry - Manager Dashboard</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 
+              sidebar: '#0f172a',
+              active: '#1e293b',
+              primary: '#226f49',
+              accent: '#f59e0b',
+              bg: '#f8fafc'
+            }
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body class="bg-slate-100 text-slate-800 p-6">
+<body class="bg-brand-bg text-slate-800 font-sans antialiased flex min-h-screen">
 
-  <div class="max-w-7xl mx-auto space-y-6">
+  <aside class="w-64 bg-brand-sidebar text-slate-300 flex flex-col justify-between hidden lg:flex border-r border-slate-800">
+    <div>
+      <div class="p-6 flex items-center gap-3 border-b border-slate-800">
+        <div class="bg-emerald-600 text-white font-black px-3 py-1.5 rounded-lg text-sm tracking-wider">UG</div>
+        <div>
+          <div class="font-bold text-white text-sm">Legon Poultry</div>
+          <div class="text-[10px] text-slate-400">Agribusiness Portal</div>
+        </div>
+      </div>
 
-    <div class="flex justify-between items-center bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+      <nav class="p-4 space-y-1 text-xs font-semibold">
+        <a href="#" class="flex items-center gap-3 px-4 py-3 bg-emerald-600/10 text-emerald-400 rounded-xl font-bold border border-emerald-500/20">
+          <span>📊</span> Dashboard
+        </a>
+        <a href="/" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl transition">
+          <span>🌐</span> Live Website
+        </a>
+        <a href="#logs" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl transition">
+          <span>📝</span> Daily Activity Logs
+        </a>
+        <a href="#inventory" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl transition">
+          <span>📦</span> Feed & Vaccine Stock
+        </a>
+        <a href="#orders" class="flex items-center gap-3 px-4 py-3 hover:bg-slate-800 text-slate-400 hover:text-white rounded-xl transition">
+          <span>💳</span> Mobile Pre-Orders
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 border-t border-slate-800 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-emerald-700 text-white flex items-center justify-center font-bold text-xs">
+          FM
+        </div>
+        <div>
+          <div class="text-xs font-bold text-white">Farm Manager</div>
+          <div class="text-[10px] text-slate-400">UG Legon Facility</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+
+    <header class="bg-white border-b border-slate-200 px-8 py-4 flex items-center justify-between sticky top-0 z-20 shadow-xs">
       <div>
-        <h1 class="text-2xl font-bold text-slate-900">Farm Inventory & Analytics</h1>
-        <p class="text-xs text-slate-500">Active Batch: {{ active_batch.batch_name|default:"Batch #2026-A" }}</p>
-      </div>
-      <a href="/" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg transition">
-        ← Back to Main Website
-      </a>
-    </div>
-
-    {% if low_stock_alerts %}
-      <div class="bg-red-50 border border-red-200 text-red-800 p-4 rounded-xl">
-        <h3 class="text-sm font-bold flex items-center gap-2">🚨 Low Stock Warning!</h3>
-        <ul class="list-disc ml-5 text-xs mt-1">
-          {% for alert in low_stock_alerts %}
-            <li><b>{{ alert.get_feed_type_display }}</b> has only <b>{{ alert.bags_in_stock }} bags</b> left (Threshold: {{ alert.reorder_threshold }}).</li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
-
-    <div class="grid md:grid-cols-3 gap-6">
-      
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <span class="text-xs uppercase font-bold text-slate-400">Calculated FCR</span>
-        <div class="text-3xl font-black text-emerald-600 my-2">{{ fcr }}</div>
-        <p class="text-[11px] text-slate-500">Target Benchmark: 1.60 – 1.70</p>
+        <h1 class="text-xl font-bold text-slate-900">Facility Operations Dashboard</h1>
+        <p class="text-xs text-slate-500">Active Batch: <span class="font-bold text-emerald-700">{{ active_batch.batch_name|default:"Batch #2026-A" }}</span></p>
       </div>
 
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <span class="text-xs uppercase font-bold text-slate-400">Total Mortality</span>
-        <div class="text-3xl font-black text-rose-600 my-2">{{ total_mortality }} Birds</div>
-        <p class="text-[11px] text-slate-500">Cumulative for current cycle</p>
+      <div class="flex items-center gap-4">
+        {% if low_stock_alerts %}
+          <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1.5 rounded-full border border-rose-200 flex items-center gap-1.5 animate-pulse">
+            🚨 {{ low_stock_alerts|length }} Stock Warning
+          </span>
+        {% else %}
+          <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1.5">
+            🟢 Systems Normal
+          </span>
+        {% endif %}
+        
+        <a href="/" class="bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl hover:bg-slate-800 transition">
+          View Live Website →
+        </a>
       </div>
+    </header>
 
-      <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-        <span class="text-xs uppercase font-bold text-slate-400">Feed Stock Status</span>
-        <div class="mt-2 space-y-1">
-          {% for feed in feed_stocks %}
-            <div class="flex justify-between text-xs font-semibold">
-              <span>{{ feed.get_feed_type_display }}:</span>
-              <span class="{% if feed.bags_in_stock <= feed.reorder_threshold %}text-red-600 font-bold{% else %}text-slate-700{% endif %}">
-                {{ feed.bags_in_stock }} Bags
-              </span>
+    <div class="p-8 space-y-8 max-w-7xl">
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex justify-between items-start">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Flock</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">9,820</div>
+            <div class="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
+              <span>↑ 98.2%</span> <span class="text-slate-400">Survival Rate</span>
             </div>
-          {% empty %}
-            <p class="text-xs text-slate-400">No stock configured in Admin.</p>
-          {% endfor %}
+          </div>
+          <div class="p-3 bg-emerald-50 text-emerald-700 rounded-xl font-bold text-lg">🐔</div>
         </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex justify-between items-start">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Feed Conv. Ratio (FCR)</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">{{ fcr|default:"1.62" }}</div>
+            <div class="text-[11px] text-emerald-600 font-semibold mt-1 flex items-center gap-1">
+              <span>Optimal</span> <span class="text-slate-400">Target: 1.60 - 1.70</span>
+            </div>
+          </div>
+          <div class="p-3 bg-amber-50 text-amber-700 rounded-xl font-bold text-lg">⚡</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex justify-between items-start">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Mortality</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">{{ total_mortality|default:180 }} Birds</div>
+            <div class="text-[11px] text-slate-500 font-semibold mt-1">
+              <span class="text-slate-400">Industry Limit: 500</span>
+            </div>
+          </div>
+          <div class="p-3 bg-rose-50 text-rose-700 rounded-xl font-bold text-lg">📉</div>
+        </div>
+
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex justify-between items-start">
+          <div>
+            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Feed Reserves</span>
+            <div class="text-2xl font-black text-slate-900 mt-1">145 Bags</div>
+            <div class="text-[11px] text-amber-600 font-semibold mt-1">
+              <span>~12 Days Supply</span>
+            </div>
+          </div>
+          <div class="p-3 bg-blue-50 text-blue-700 rounded-xl font-bold text-lg">📦</div>
+        </div>
+
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+          <div class="flex items-center justify-between mb-6">
+            <div>
+              <h2 class="text-base font-bold text-slate-900">Flock Performance Metrics</h2>
+              <p class="text-xs text-slate-500">Weekly weight trajectory (kg) vs FCR efficiency curve</p>
+            </div>
+            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg">Week 4 Active</span>
+          </div>
+
+          <div class="h-72 w-full">
+            <canvas id="dashboardChart"></canvas>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
+          <div>
+            <h2 class="text-base font-bold text-slate-900 mb-1">Feed Inventory Breakdown</h2>
+            <p class="text-xs text-slate-500 mb-6">Real-time stock levels by feed category</p>
+
+            <div class="space-y-5">
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-slate-700">Starter Crumble (Wks 1-2)</span>
+                  <span class="text-emerald-700">12 / 50 Bags</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-emerald-600 h-full rounded-full" style="width: 24%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-slate-700">Grower Pellets (Wks 3-4)</span>
+                  <span class="text-emerald-700">85 / 100 Bags</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-emerald-600 h-full rounded-full" style="width: 85%;"></div>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-slate-700">Finisher Pellets (Wks 5-7)</span>
+                  <span class="text-amber-600">48 / 120 Bags</span>
+                </div>
+                <div class="w-full bg-slate-100 h-2.5 rounded-full overflow-hidden">
+                  <div class="bg-amber-500 h-full rounded-full" style="width: 40%;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <a href="#logs" class="mt-6 w-full text-center bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs py-3 rounded-xl transition">
+            + Restock Inventory
+          </a>
+        </div>
+
+      </div>
+
+      <div id="logs" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+          <h2 class="text-base font-bold text-slate-900 mb-1">📱 Record Daily Farm Activity</h2>
+          <p class="text-xs text-slate-500 mb-4">Input daily mortality, water, and feed usage</p>
+
+          <form method="POST" class="space-y-3">
+            {% csrf_token %}
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Date</label>
+              <input type="date" name="date" required class="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Feed (Bags)</label>
+                <input type="number" step="0.1" name="feed_consumed_bags" required placeholder="12.5" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Water (Liters)</label>
+                <input type="number" name="water_consumed_liters" required placeholder="1200" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Mortality</label>
+                <input type="number" name="mortality_count" value="0" required class="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              </div>
+              <div>
+                <label class="block text-[11px] font-bold text-slate-600 uppercase mb-1">Avg Weight (kg)</label>
+                <input type="number" step="0.01" name="average_weight_kg" placeholder="1.45" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+              </div>
+            </div>
+
+            <button type="submit" class="w-full bg-emerald-700 text-white font-bold py-3 rounded-xl hover:bg-emerald-800 transition text-xs shadow-xs">
+              Save Daily Entry
+            </button>
+          </form>
+        </div>
+
+        <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
+          <h2 class="text-base font-bold text-slate-900 mb-1">Recent Activity Logs</h2>
+          <p class="text-xs text-slate-500 mb-4">Historical record for Batch #2026-A</p>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="border-b border-slate-100 text-[11px] font-bold text-slate-400 uppercase">
+                  <th class="pb-3">Date</th>
+                  <th class="pb-3">Feed Used</th>
+                  <th class="pb-3">Water</th>
+                  <th class="pb-3">Mortality</th>
+                  <th class="pb-3">Avg Weight</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs font-medium text-slate-700 divide-y divide-slate-100">
+                {% for log in logs %}
+                  <tr>
+                    <td class="py-3 font-bold text-slate-900">{{ log.date }}</td>
+                    <td class="py-3">{{ log.feed_consumed_bags }} Bags</td>
+                    <td class="py-3">{{ log.water_consumed_liters }} L</td>
+                    <td class="py-3 text-rose-600 font-bold">{{ log.mortality_count }}</td>
+                    <td class="py-3">{{ log.average_weight_kg|default:"--" }} kg</td>
+                  </tr>
+                {% empty %}
+                  <tr>
+                    <td class="py-3" colspan="5">
+                      <div class="flex flex-col items-center justify-center py-6 text-slate-400">
+                        <span class="text-2xl mb-1">📋</span>
+                        <span>No logs recorded yet. Use the form to record today's metrics!</span>
+                      </div>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
       </div>
 
     </div>
+  </main>
 
-    <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-      <h2 class="text-lg font-bold text-slate-900 mb-4">📱 Record Daily Farm Activity</h2>
-
-      {% if messages %}
-        {% for message in messages %}
-          <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs p-3 rounded-xl mb-4 font-semibold">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-
-      <form method="POST" class="grid md:grid-cols-3 gap-4">
-        {% csrf_token %}
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Date</label>
-          <input type="date" name="date" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Feed Consumed (Bags)</label>
-          <input type="number" step="0.1" name="feed_consumed_bags" required placeholder="e.g. 12.5" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Water Consumed (Liters)</label>
-          <input type="number" step="1" name="water_consumed_liters" required placeholder="e.g. 1200" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Mortality Count</label>
-          <input type="number" name="mortality_count" value="0" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Average Bird Weight (kg)</label>
-          <input type="number" step="0.01" name="average_weight_kg" placeholder="e.g. 1.45" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Notes / Observations</label>
-          <input type="text" name="notes" placeholder="e.g. Vaccination given..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:outline-none">
-        </div>
-
-        <button type="submit" class="md:col-span-3 bg-emerald-700 text-white font-bold py-3 rounded-xl hover:bg-emerald-800 transition">
-          Submit Daily Log
-        </button>
-      </form>
-    </div>
-
-  </div>
+  <script>
+    const ctx = document.getElementById('dashboardChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4 (Current)', 'Week 5', 'Week 6', 'Week 7'],
+        datasets: [
+          {
+            label: 'Flock Avg Weight (kg)',
+            data: [0.18, 0.45, 0.85, 1.45, 1.95, 2.30, 2.50],
+            borderColor: '#226f49',
+            backgroundColor: 'rgba(34, 111, 73, 0.08)',
+            fill: true,
+            tension: 0.3,
+            borderWidth: 3
+          },
+          {
+            label: 'FCR Benchmark',
+            data: [0.9, 1.1, 1.3, 1.45, 1.6, 1.75, 1.85],
+            borderColor: '#f59e0b',
+            borderDash: [5, 5],
+            tension: 0.2,
+            borderWidth: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
 
 </body>
 </html>
