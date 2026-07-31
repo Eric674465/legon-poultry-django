@@ -12,6 +12,12 @@ from xhtml2pdf import pisa
 from .models import PreOrder, BatchMetric
 from blog.models import Post  # 👈 Imported Post model to serve blog posts on home page
 
+# Safe import for blog Post model
+try:
+    from blog.models import Post
+except ModuleNotFoundError:
+    Post = None
+
 # 🔑 Reads from Render environment variables in production, falls back to local test key
 PAYSTACK_SECRET_KEY = os.environ.get(
     "PAYSTACK_SECRET_KEY", 

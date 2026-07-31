@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'farm',  # Your farm app
     'inventory',  # Your inventory app
+    'blog',
 ]
 
 MIDDLEWARE = [
