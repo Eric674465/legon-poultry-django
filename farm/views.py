@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.urls import reverse
 from xhtml2pdf import pisa
 from .models import PreOrder, BatchMetric
+from blog.models import Post  # 👈 Imported Post model to serve blog posts on home page
 
 # 🔑 Reads from Render environment variables in production, falls back to local test key
 PAYSTACK_SECRET_KEY = os.environ.get(
@@ -27,6 +28,9 @@ def home(request):
             progress_percent = int((metric.current_week / metric.total_weeks) * 100)
         else:
             progress_percent = 57
+
+        # Fetch latest 3 published blog posts safely
+        recent_posts = Post.objects.filter(is_published=True).order_by('-created_at')[:3]
 
         if request.method == "POST":
             buyer_name = request.POST.get("buyer_name")
@@ -89,10 +93,10 @@ def home(request):
 
         context = {
             "metric": metric,
-            "progress_percent": progress_percent
+            "progress_percent": progress_percent,
+            "recent_posts": recent_posts  # 👈 Passed to index.html context
         }
         return render(request, "index.html", context)
-        html_string = render_to_string("pdf_report.html", {"metric": metric})
 
     except Exception as e:
         # Prints exact traceback in Render logs and on screen for debugging
