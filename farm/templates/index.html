@@ -154,6 +154,70 @@
     </div>
   </section>
 
+  <section id="diagnostics" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-100">
+        <div>
+          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Veterinary Diagnostic Assistant</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Poultry Symptom Checker & Disease Guide</h2>
+        </div>
+        <span class="text-xs font-semibold bg-poultry-light text-poultry-red px-3 py-1.5 rounded-full border border-pink-200 mt-2 md:mt-0 self-start md:self-auto">
+          🩺 MoFA & Veterinary Compliant
+        </span>
+      </div>
+
+      <div class="grid md:grid-cols-12 gap-8">
+        <div class="md:col-span-5 space-y-4">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Select Observed Flock Symptoms:</h3>
+          
+          <div class="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs font-medium text-slate-700">
+            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition cursor-pointer border border-transparent hover:border-slate-200">
+              <input type="checkbox" value="respiratory" class="symptom-check w-4 h-4 text-poultry-red rounded focus:ring-poultry-red">
+              <span>Nasal Discharge, Sneezing or Coughing</span>
+            </label>
+            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition cursor-pointer border border-transparent hover:border-slate-200">
+              <input type="checkbox" value="feed_drop" class="symptom-check w-4 h-4 text-poultry-red rounded focus:ring-poultry-red">
+              <span>Sudden Drop in Feed & Water Intake</span>
+            </label>
+            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition cursor-pointer border border-transparent hover:border-slate-200">
+              <input type="checkbox" value="bloody_stool" class="symptom-check w-4 h-4 text-poultry-red rounded focus:ring-poultry-red">
+              <span>Bloody Droppings or Severe Diarrhea</span>
+            </label>
+            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition cursor-pointer border border-transparent hover:border-slate-200">
+              <input type="checkbox" value="paralysis" class="symptom-check w-4 h-4 text-poultry-red rounded focus:ring-poultry-red">
+              <span>Lethargy, Drooping Wings or Tremors</span>
+            </label>
+            <label class="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition cursor-pointer border border-transparent hover:border-slate-200">
+              <input type="checkbox" value="swollen_head" class="symptom-check w-4 h-4 text-poultry-red rounded focus:ring-poultry-red">
+              <span>Swollen Head, Comb, or Wattles</span>
+            </label>
+          </div>
+
+          <button id="resetDiagnostics" type="button" class="text-xs font-bold text-slate-500 hover:text-poultry-red underline transition">
+            Clear Symptom Selection
+          </button>
+        </div>
+
+        <div class="md:col-span-7 bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between">
+          <div id="diagnosticResults" class="space-y-4">
+            <div class="text-center py-10 space-y-2">
+              <div class="text-4xl">🔍</div>
+              <p class="text-xs font-bold text-slate-600">Select one or more symptoms on the left to generate diagnostic insights.</p>
+              <p class="text-[11px] text-slate-400">Diagnostic models cover Newcastle Disease, Coccidiosis, Gumboro (IBD), and Infectious Coryza.</p>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-200 text-[11px] text-slate-500 flex justify-between items-center">
+            <span>Note: Always consult a certified MoFA veterinary officer for laboratory confirmation.</span>
+            <a href="https://wa.me/233240000000?text=Hello%20UG%20Legon%20Vet%20Team,%20I%20need%20assistance%20with%20flock%20health" target="_blank" class="font-bold text-poultry-red hover:underline">
+              Contact Vet Officer →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="gallery" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-28">
     <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-6">
@@ -368,6 +432,101 @@
   </footer>
 
   <script>
+    // 🩺 INTERACTIVE DISEASE DIAGNOSTIC ENGINE
+    const symptomChecks = document.querySelectorAll('.symptom-check');
+    const diagnosticResults = document.getElementById('diagnosticResults');
+    const resetDiagnostics = document.getElementById('resetDiagnostics');
+
+    const diseasesDB = [
+      {
+        name: "Newcastle Disease (ND)",
+        severity: "HIGH - Highly Contagious Viral Infection",
+        symptomsRequired: ["respiratory", "paralysis", "feed_drop"],
+        description: "A acute viral disease affecting respiratory, nervous, and digestive systems.",
+        action: "Isolate affected birds immediately. Enforce strict quarantine and notify MoFA veterinary officers for emergency vaccination protocols."
+      },
+      {
+        name: "Coccidiosis",
+        severity: "MODERATE TO HIGH - Parasitic Infection",
+        symptomsRequired: ["bloody_stool", "feed_drop"],
+        description: "Intestinal disease caused by protozoan parasites affecting litter hygiene and gut health.",
+        action: "Administer anticoccidial medications via water lines. Replace wet litter and thoroughly disinfect feeder zones."
+      },
+      {
+        name: "Infectious Coryza",
+        severity: "MODERATE - Bacterial Respiratory Disease",
+        symptomsRequired: ["respiratory", "swollen_head"],
+        description: "Bacterial infection causing facial edema, nasal discharge, and reduced growth rates.",
+        action: "Administer vet-prescribed antibiotic treatment. Ensure proper cross-ventilation across open-sided housing."
+      },
+      {
+        name: "Infectious Bursal Disease (Gumboro / IBD)",
+        severity: "HIGH - Immunosuppressive Viral Infection",
+        symptomsRequired: ["paralysis", "feed_drop"],
+        description: "Targeting young chicks, causing severe immunosuppression and vulnerability to secondary infections.",
+        action: "Review chick vaccination schedules, increase electrolyte water supplements, and sanitize footbath stations."
+      }
+    ];
+
+    function updateDiagnostics() {
+      const selectedSymptoms = Array.from(symptomChecks)
+        .filter(i => i.checked)
+        .map(i => i.value);
+
+      if (selectedSymptoms.length === 0) {
+        diagnosticResults.innerHTML = `
+          <div class="text-center py-10 space-y-2">
+            <div class="text-4xl">🔍</div>
+            <p class="text-xs font-bold text-slate-600">Select one or more symptoms on the left to generate diagnostic insights.</p>
+            <p class="text-[11px] text-slate-400">Diagnostic models cover Newcastle Disease, Coccidiosis, Gumboro (IBD), and Infectious Coryza.</p>
+          </div>
+        `;
+        return;
+      }
+
+      const matchedDiseases = diseasesDB.filter(disease => 
+        disease.symptomsRequired.some(sym => selectedSymptoms.includes(sym))
+      );
+
+      if (matchedDiseases.length === 0) {
+        diagnosticResults.innerHTML = `
+          <div class="bg-amber-50 border border-amber-200 text-amber-900 p-4 rounded-xl text-xs font-medium space-y-1">
+            <h4 class="font-bold text-sm">Non-Specific Symptoms Detected</h4>
+            <p>Monitored symptoms suggest general flock stress, heat exhaustion, or early-stage feed transit issues.</p>
+            <p class="text-[11px] text-amber-700 font-bold mt-2">Recommended Step: Monitor water line pressure and check house ambient temperature.</p>
+          </div>
+        `;
+        return;
+      }
+
+      let htmlContent = '<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Potential Disease Matches:</h4>';
+
+      matchedDiseases.forEach(d => {
+        htmlContent += `
+          <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2 shadow-2xs">
+            <div class="flex justify-between items-start">
+              <h5 class="text-sm font-extrabold text-poultry-red">${d.name}</h5>
+              <span class="text-[10px] font-bold bg-pink-100 text-poultry-dark px-2 py-0.5 rounded border border-pink-200">${d.severity}</span>
+            </div>
+            <p class="text-xs text-slate-600">${d.description}</p>
+            <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-[11px] font-semibold text-slate-700">
+              <span class="text-poultry-red font-bold">MoFA Protocol:</span> ${d.action}
+            </div>
+          </div>
+        `;
+      });
+
+      diagnosticResults.innerHTML = htmlContent;
+    }
+
+    symptomChecks.forEach(check => check.addEventListener('change', updateDiagnostics));
+
+    if (resetDiagnostics) {
+      resetDiagnostics.addEventListener('click', () => {
+        symptomChecks.forEach(c => c.checked = false);
+        updateDiagnostics();
+      });
+    }
     const flockInput = document.getElementById('flockInput');
     const feedResult = document.getElementById('feedResult');
     const yieldResult = document.getElementById('yieldResult');
