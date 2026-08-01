@@ -1,0 +1,3 @@
+C:\Users\aduer>cd C:\Users\aduer\OneDrive\Documents\Desktop\legon_poultry_django
+
+C:\Users\aduer\OneDrive\Documents\Desktop\legon_poultry_django>venv\Scripts\activate

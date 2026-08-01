@@ -9,6 +9,49 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+  <style>
+    /* Card hover elevation effect */
+    .animated-card {
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .animated-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px -10px rgba(128, 0, 32, 0.15);
+    }
+
+    /* Custom scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #800020;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #580016;
+    }
+
+    /* Soft entrance animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+  </style>
+
   <script>
     tailwind.config = {
       theme: {
@@ -47,7 +90,7 @@
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
     <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
       <div class="flex items-center space-x-3">
-        <a href="/" class="bg-poultry-red text-white font-black px-4 py-2 rounded-xl text-lg tracking-wider flex items-center gap-2 shadow-xs">
+        <a href="/" class="bg-poultry-red text-white font-black px-4 py-2 rounded-xl text-lg tracking-wider flex items-center gap-2 shadow-xs hover:bg-poultry-dark transition duration-300">
           <span>🐔</span>
           <span>The Poultry Site</span>
         </a>
@@ -57,13 +100,13 @@
       </div>
 
       <div class="flex items-center space-x-3">
-        <a href="/download-proposal/" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2.5 rounded-full transition hidden sm:inline-block">
+        <a href="/download-proposal/" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2.5 rounded-full transition duration-300 hidden sm:inline-block">
           📄 Technical Proposal PDF
         </a>
-        <a href="#preorder" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition shadow-xs">
+        <a href="#preorder" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition duration-300 shadow-xs">
           Pre-Order Batch
         </a>
-        <a href="/inventory/" class="bg-slate-800 text-white text-xs font-bold px-3.5 py-2.5 rounded-full hover:bg-slate-900 transition">
+        <a href="/inventory/" class="bg-slate-800 text-white text-xs font-bold px-3.5 py-2.5 rounded-full hover:bg-slate-900 transition duration-300">
           📊 Staff Login
         </a>
       </div>
@@ -71,28 +114,19 @@
 
     <nav class="bg-poultry-red text-white text-xs font-bold overflow-x-auto whitespace-nowrap shadow-md">
       <div class="max-w-7xl mx-auto px-6 flex space-x-1 sm:space-x-3">
-        <a href="#hero" class="px-3.5 py-3 hover:bg-poultry-dark transition">Home</a>
-        <a href="#knowledge" class="px-3.5 py-3 hover:bg-poultry-dark transition bg-poultry-dark/50">Knowledge Centre</a>
-        <a href="#diagnostics" class="px-3.5 py-3 hover:bg-poultry-dark transition">Disease Diagnostic Tool</a>
-        <a href="#pricing" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Pricing</a>
-        <a href="#gallery" class="px-3.5 py-3 hover:bg-poultry-dark transition">Facility Tour</a>
-        <a href="#calculator" class="px-3.5 py-3 hover:bg-poultry-dark transition">Yield Engine</a>
-        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition">Agribusiness News</a>
-        <a href="#preorder" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Orders</a>
+        <a href="#hero" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Home</a>
+        <a href="#knowledge" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200 bg-poultry-dark/50">Knowledge Centre</a>
+        <a href="#diagnostics" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Disease Diagnostic Tool</a>
+        <a href="#pricing" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Wholesale Pricing</a>
+        <a href="#gallery" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Facility Tour</a>
+        <a href="#calculator" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Yield Engine</a>
+        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Agribusiness News</a>
+        <a href="#preorder" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Wholesale Orders</a>
       </div>
     </nav>
-
-    <div class="bg-slate-100 text-slate-600 text-[11px] font-semibold border-b border-slate-200 px-6 py-1.5 hidden md:block">
-      <div class="max-w-7xl mx-auto flex space-x-6">
-        <span class="text-slate-400 font-bold uppercase tracking-wider">Focus Markets:</span>
-        <a href="#" class="text-poultry-red font-bold hover:underline">Accra Wholesale Region</a>
-        <a href="#" class="hover:text-slate-900 transition">Hotel & Restaurant Supply</a>
-        <a href="#" class="hover:text-slate-900 transition">Cold Chain Logistics</a>
-      </div>
-    </div>
   </header>
 
-  <section id="hero" class="bg-slate-200/70 border-b border-slate-300 py-10 px-6">
+  <section id="hero" class="bg-slate-200/70 border-b border-slate-300 py-10 px-6 fade-in-up">
     <div class="max-w-4xl mx-auto text-center space-y-6">
       
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-6 opacity-85">
@@ -103,7 +137,7 @@
         <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-700 px-3.5 py-1.5 rounded-lg shadow-2xs">AVIAGEN</span>
       </div>
 
-      <div class="max-w-2xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md">
+      <div class="max-w-2xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md focus-within:ring-4 focus-within:ring-poultry-red/20 transition">
         <input 
           type="text" 
           placeholder="Search articles, diseases, bulk prices, and biosecurity..." 
@@ -135,32 +169,32 @@
 
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
       
-      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
-        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition">
+      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs animated-card text-center group flex flex-col items-center">
+        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition duration-300">
           🐔
         </div>
         <h3 class="font-bold text-slate-900 text-sm leading-snug">Poultry Health Insights</h3>
         <p class="text-[11px] text-slate-500 mt-1">Vaccination & disease management</p>
       </a>
 
-      <a href="#diagnostics" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
-        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition">
+      <a href="#diagnostics" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs animated-card text-center group flex flex-col items-center">
+        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition duration-300">
           🩺
         </div>
         <h3 class="font-bold text-slate-900 text-sm leading-snug">Poultry Disease Guide</h3>
         <p class="text-[11px] text-slate-500 mt-1">Interactive symptom checker & diagnostics</p>
       </a>
 
-      <a href="#calculator" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
-        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition">
+      <a href="#calculator" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs animated-card text-center group flex flex-col items-center">
+        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition duration-300">
           🌾
         </div>
         <h3 class="font-bold text-slate-900 text-sm leading-snug">Feed & Yield Engine</h3>
         <p class="text-[11px] text-slate-500 mt-1">FCR optimization & intake calculations</p>
       </a>
 
-      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
-        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition">
+      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs animated-card text-center group flex flex-col items-center">
+        <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition duration-300">
           🧼
         </div>
         <h3 class="font-bold text-slate-900 text-sm leading-snug">Biosecurity Protocols</h3>
@@ -246,7 +280,7 @@
 
       <div class="grid md:grid-cols-3 gap-6">
         
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4 animated-card">
           <div>
             <span class="bg-slate-200 text-slate-700 text-[10px] font-extrabold px-2.5 py-1 rounded uppercase">Retail / Small Order</span>
             <h3 class="text-lg font-bold text-slate-900 mt-3">50 – 200 Birds</h3>
@@ -260,7 +294,7 @@
           <a href="#preorder" class="block text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Order Small Batch</a>
         </div>
 
-        <div class="bg-poultry-red text-white rounded-xl p-6 flex flex-col justify-between space-y-4 shadow-md relative border-2 border-poultry-accent">
+        <div class="bg-poultry-red text-white rounded-xl p-6 flex flex-col justify-between space-y-4 animated-card shadow-md relative border-2 border-poultry-accent">
           <div>
             <span class="bg-poultry-accent text-slate-950 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Most Popular</span>
             <h3 class="text-lg font-bold mt-3">200 – 1,000 Birds</h3>
@@ -274,7 +308,7 @@
           <a href="#preorder" class="block text-center bg-poultry-accent text-slate-950 text-xs font-black py-2.5 rounded-lg hover:bg-amber-400 transition">Reserve Wholesale Tier</a>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4 animated-card">
           <div>
             <span class="bg-slate-200 text-slate-700 text-[10px] font-extrabold px-2.5 py-1 rounded uppercase">Contract Distributor</span>
             <h3 class="text-lg font-bold text-slate-900 mt-3">1,000+ Birds</h3>
@@ -304,7 +338,7 @@
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
-        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card group">
           <div class="h-44 bg-slate-200 overflow-hidden relative">
             <img src="https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Broiler Flock" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Flock Health</span>
@@ -315,7 +349,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card group">
           <div class="h-44 bg-slate-200 overflow-hidden relative">
             <img src="https://images.pexels.com/photos/1300361/pexels-photo-1300361.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Brooding Chicks" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Brooding</span>
@@ -326,7 +360,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card group">
           <div class="h-44 bg-slate-200 overflow-hidden relative">
             <img src="https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Feeding Lines" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Automation</span>
@@ -337,7 +371,7 @@
           </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card group">
           <div class="h-44 bg-slate-200 overflow-hidden relative">
             <img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fresh Processed Chicken" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
             <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Wholesale</span>
@@ -366,7 +400,7 @@
 
       <div class="grid md:grid-cols-3 gap-6">
         {% for post in recent_posts %}
-          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition duration-300 flex flex-col justify-between">
+          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
             <div>
               <div class="h-44 bg-slate-200 overflow-hidden relative">
                 <img 
@@ -472,7 +506,7 @@
 
   <a href="https://wa.me/233240000000?text=Hello%20UG%20Legon%20Poultry,%20I%20want%20to%20inquire%20about%20wholesale%20broiler%20orders" 
      target="_blank" 
-     class="fixed bottom-6 right-6 bg-emerald-600 text-white p-3.5 px-4 rounded-full shadow-lg z-50 hover:bg-emerald-700 transition flex items-center gap-2 text-xs font-bold">
+     class="fixed bottom-6 right-6 bg-emerald-600 text-white p-3.5 px-4 rounded-full shadow-lg z-50 hover:bg-emerald-700 transition flex items-center gap-2 text-xs font-bold animated-card">
     <span>💬</span>
     <span>Wholesale WhatsApp</span>
   </a>
