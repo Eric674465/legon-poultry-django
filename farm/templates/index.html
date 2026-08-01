@@ -4,247 +4,215 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UG Legon Commercial Broiler Facility</title>
-  
+  <title>UG Legon Poultry Facility | Knowledge Centre & Agribusiness Portal</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  
+
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            legon: { dark: '#153e2b', primary: '#226f49', light: '#e8f5ed', accent: '#f59e0b' }
+            poultry: {
+              red: '#800020',       /* Deep Burgundy like The Poultry Site */
+              dark: '#580016',
+              light: '#fdf2f4',
+              accent: '#f59e0b',
+              green: '#153e2b'
+            }
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body class="bg-slate-100 text-slate-800 font-sans antialiased">
 
-  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
+    <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-3">
-        <div class="bg-emerald-900 text-white font-black px-3 py-1.5 rounded-lg text-lg tracking-wider">UG LEGON</div>
-        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest hidden sm:inline">Poultry Facility</span>
+        <a href="/" class="bg-poultry-red text-white font-black px-3.5 py-2 rounded-lg text-lg tracking-wider flex items-center gap-2">
+          <span>🐔</span>
+          <span>UG LEGON POULTRY</span>
+        </a>
+        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest hidden lg:inline">
+          Commercial Broiler Facility & Research Hub
+        </span>
       </div>
-      
-      <nav class="hidden md:flex space-x-8 font-semibold text-sm text-slate-600">
-       <a href="#hero" class="hover:text-emerald-700 transition">Home</a>
-       <a href="#gallery" class="hover:text-emerald-700 transition">Gallery</a>
-       <a href="#specs" class="hover:text-emerald-700 transition">Specifications</a>
-       <a href="#transparency" class="hover:text-emerald-700 transition">Biosecurity</a>
-       <a href="#blog" class="hover:text-emerald-700 transition">Blog</a>
-       <a href="#calculator" class="hover:text-emerald-700 transition">Yield Engine</a>
-       <a href="#preorder" class="hover:text-emerald-700 transition">Pre-Order</a>
-      </nav>
 
-      <a href="#preorder" class="bg-emerald-700 text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-emerald-900 transition shadow-sm">
-        Pre-Order Batch
-      </a>
+      <div class="flex items-center space-x-4">
+        <a href="#preorder" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition shadow-xs">
+          Pre-Order Batch
+        </a>
+        <a href="/inventory/" class="bg-slate-100 text-slate-700 text-xs font-bold px-4 py-2.5 rounded-full hover:bg-slate-200 transition">
+          📊 Manager Login
+        </a>
+      </div>
     </div>
+
+    <nav class="bg-poultry-red text-white text-xs font-bold overflow-x-auto whitespace-nowrap shadow-md">
+      <div class="max-w-7xl mx-auto px-6 flex space-x-1 sm:space-x-4">
+        <a href="#hero" class="px-3 py-2.5 hover:bg-poultry-dark transition">Home</a>
+        <a href="#knowledge" class="px-3 py-2.5 hover:bg-poultry-dark transition bg-poultry-dark/40">Knowledge Centre</a>
+        <a href="#specs" class="px-3 py-2.5 hover:bg-poultry-dark transition">Genetics & Breeding</a>
+        <a href="#transparency" class="px-3 py-2.5 hover:bg-poultry-dark transition">Health & Biosecurity</a>
+        <a href="#calculator" class="px-3 py-2.5 hover:bg-poultry-dark transition">Yield Engine</a>
+        <a href="#articles" class="px-3 py-2.5 hover:bg-poultry-dark transition">Latest News</a>
+        <a href="#preorder" class="px-3 py-2.5 hover:bg-poultry-dark transition">Wholesale Orders</a>
+      </div>
+    </nav>
   </header>
 
-  <section id="hero" class="max-w-7xl mx-auto px-6 pt-6">
-    <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-emerald-800 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden shadow-xl flex flex-col md:flex-row items-center justify-between">
-      <div class="z-10 max-w-xl space-y-4">
-        <span class="bg-white/10 backdrop-blur-md text-amber-300 text-xs font-bold px-3 py-1 rounded-full border border-white/20">
-          Academic Project & Agribusiness Design
-        </span>
-        <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
-          Commercial Broiler Facility at UG Legon
-        </h1>
-        <p class="text-slate-200 text-sm md:text-base leading-relaxed">
-          Preliminary design for a 10,000-bird capacity poultry facility across 2 hectares. Optimized for biosecurity, reliable water supply, and ideal wind orientation.
-        </p>
-        <div class="pt-2 flex flex-wrap gap-4">
-          <a href="#preorder" class="bg-amber-400 text-slate-900 font-bold text-sm px-6 py-3 rounded-full hover:bg-amber-300 transition shadow-md">
-            Reserve Wholesale Broilers
-          </a>
-          <a href="/download-proposal/" class="bg-white/10 border border-white/30 text-white font-semibold text-sm px-6 py-3 rounded-full hover:bg-white/20 transition flex items-center gap-2">
-            <span>📄 Download Technical Proposal PDF</span>
-          </a>
-        </div>
-      </div>
-      <div class="mt-8 md:mt-0 z-10 bg-white/10 backdrop-blur-lg border border-white/20 p-6 rounded-2xl text-center min-w-[240px]">
-        <span class="text-xs uppercase font-bold text-amber-300 tracking-wider">Current Harvest Batch</span>
-        <div class="text-4xl font-extrabold my-2">10,000</div>
-        <span class="text-xs text-slate-200">Broilers (All-in / All-out System)</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="gallery" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-24">
-    <div class="flex flex-col md:flex-row md:items-end justify-between mb-6">
-      <div>
-        <span class="text-xs uppercase font-bold text-emerald-700 tracking-wider">Visual Tour</span>
-        <h2 class="text-2xl font-bold text-slate-900">Facility & Broiler Production</h2>
-      </div>
-      <p class="text-xs text-slate-500 mt-2 md:mt-0">Commercial broiler management under strict biosecure standards.</p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+  <section id="hero" class="bg-slate-200/60 border-b border-slate-300 py-10 px-6">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
       
-      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition group">
-        <div class="h-48 overflow-hidden relative bg-slate-100">
-          <img 
-            src="https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Healthy Broiler Chicken Flock" 
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          >
-          <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-            Flock Health
-          </span>
-        </div>
-        <div class="p-4">
-          <h3 class="font-bold text-slate-900 text-sm">Cobb 500 Broilers</h3>
-          <p class="text-xs text-slate-500 mt-1">Targeting 2.0–2.5 kg weight in 6 to 7 weeks.</p>
-        </div>
+      <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-6 opacity-75">
+        <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-600 px-3 py-1 rounded-md">UG LEGON</span>
+        <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-600 px-3 py-1 rounded-md">MoFA GHANA</span>
+        <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-600 px-3 py-1 rounded-md">COBB 500</span>
+        <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-600 px-3 py-1 rounded-md">ZOETIS VET</span>
       </div>
 
-      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition group">
-        <div class="h-48 overflow-hidden relative bg-slate-100">
-          <img 
-            src="https://images.pexels.com/photos/1300361/pexels-photo-1300361.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Automated Brooding Chicks" 
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          >
-          <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-            Brooding Stage
-          </span>
-        </div>
-        <div class="p-4">
-          <h3 class="font-bold text-slate-900 text-sm">Automated Brooding</h3>
-          <p class="text-xs text-slate-500 mt-1">Climate-monitored housing for optimal chick vitality.</p>
-        </div>
+      <h1 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">
+        Knowledge Centre & Commercial Portal
+      </h1>
+      <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto">
+        Planning, biosecurity standards, and batch inventory management for the 10,000-bird broiler facility at the University of Ghana, Legon.
+      </p>
+
+      <div class="max-w-xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md">
+        <input 
+          type="text" 
+          placeholder="Search articles, diseases, biosecurity protocols..." 
+          class="w-full px-5 py-3 text-sm text-slate-700 focus:outline-none"
+        >
+        <button class="bg-poultry-red text-white font-bold text-xs px-6 py-3.5 hover:bg-poultry-dark transition">
+          Search
+        </button>
       </div>
 
-      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition group">
-        <div class="h-48 overflow-hidden relative bg-slate-100">
-          <img 
-            src="https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Poultry Feeding & Watering" 
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          >
-          <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-            Farm Management
-          </span>
-        </div>
-        <div class="p-4">
-          <h3 class="font-bold text-slate-900 text-sm">Automated Feed & Water</h3>
-          <p class="text-xs text-slate-500 mt-1">Pan feeders and nipple drinkers for optimal FCR.</p>
-        </div>
-      </div>
-
-      <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-md transition group">
-        <div class="h-48 overflow-hidden relative bg-slate-100">
-          <img 
-            src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=800" 
-            alt="Fresh Processed Whole Chicken" 
-            class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-          >
-          <span class="absolute top-3 left-3 bg-emerald-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-md">
-            Wholesale Ready
-          </span>
-        </div>
-        <div class="p-4">
-          <h3 class="font-bold text-slate-900 text-sm">Fresh Dressed Chicken</h3>
-          <p class="text-xs text-slate-500 mt-1">Veterinary-inspected wholesale poultry supply.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="specs" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-      <div class="space-y-1 border-r border-slate-100 last:border-0">
-        <div class="text-2xl font-black text-emerald-700">2.0 Ha</div>
-        <div class="text-xs font-semibold text-slate-500 uppercase">Site Area</div>
-      </div>
-      <div class="space-y-1 border-r border-slate-100 last:border-0">
-        <div class="text-2xl font-black text-emerald-700">6–7 Wks</div>
-        <div class="text-xs font-semibold text-slate-500 uppercase">Production Cycle</div>
-      </div>
-      <div class="space-y-1 border-r border-slate-100 last:border-0">
-        <div class="text-2xl font-black text-emerald-700">2.0–2.5 kg</div>
-        <div class="text-xs font-semibold text-slate-500 uppercase">Target Weight</div>
-      </div>
-      <div class="space-y-1">
-        <div class="text-2xl font-black text-emerald-700">100%</div>
-        <div class="text-xs font-semibold text-slate-500 uppercase">Biosecure Setup</div>
+      <div class="pt-2">
+        <a href="/download-proposal/" class="inline-flex items-center gap-2 bg-white border border-slate-300 text-slate-700 text-xs font-bold px-5 py-2.5 rounded-full hover:bg-slate-50 transition shadow-xs">
+          📄 Download Technical Proposal PDF
+        </a>
       </div>
     </div>
   </section>
 
-  <section id="transparency" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-slate-100">
+  <section id="knowledge" class="max-w-7xl mx-auto px-6 py-10 scroll-mt-28">
+    <div class="text-center mb-8">
+      <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Research & Management</span>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-900 mt-1">Knowledge Centre Guides</h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      
+      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
+        <div class="w-14 h-14 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-2xl mb-3 group-hover:scale-110 transition">
+          🩺
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm leading-snug">Poultry Health Insights</h3>
+        <p class="text-[11px] text-slate-500 mt-1">Vaccination & disease management</p>
+      </a>
+
+      <a href="#specs" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
+        <div class="w-14 h-14 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-2xl mb-3 group-hover:scale-110 transition">
+          🐥
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm leading-snug">Poultry Disease Guide</h3>
+        <p class="text-[11px] text-slate-500 mt-1">Symptoms & diagnostic controls</p>
+      </a>
+
+      <a href="#calculator" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
+        <div class="w-14 h-14 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-2xl mb-3 group-hover:scale-110 transition">
+          🌾
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm leading-snug">Feed & Nutrition Engine</h3>
+        <p class="text-[11px] text-slate-500 mt-1">FCR optimization & intake calculations</p>
+      </a>
+
+      <a href="#transparency" class="bg-white border border-slate-200 rounded-2xl p-5 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
+        <div class="w-14 h-14 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-2xl mb-3 group-hover:scale-110 transition">
+          🧼
+        </div>
+        <h3 class="font-bold text-slate-900 text-sm leading-snug">Biosecurity Protocols</h3>
+        <p class="text-[11px] text-slate-500 mt-1">Footbaths, water filtration & access</p>
+      </a>
+
+    </div>
+  </section>
+
+  <section id="gallery" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-6">
         <div>
-          <span class="text-xs uppercase font-bold text-emerald-700 tracking-wider">Quality Assurance</span>
-          <h2 class="text-2xl font-bold text-slate-900 mt-1">Biosecurity & Operational Standards</h2>
+          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Visual Tour</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Facility & Broiler Production</h2>
         </div>
-        <div class="mt-4 md:mt-0 flex flex-wrap gap-2">
-          <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
-            ✓ MoFA Compliant
-          </span>
-          <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
-            ✓ Veterinary Supervised
-          </span>
-          <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
-            ✓ Zero-Antibiotic Target
-          </span>
-        </div>
+        <p class="text-xs text-slate-500 mt-2 md:mt-0">2.0-Hectare site at UG Legon campus under strict veterinary standards.</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-          <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-900 text-xl font-bold mb-4">
-            🧼
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+          <div class="h-44 bg-slate-200 overflow-hidden relative">
+            <img src="https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Broiler Flock" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Flock Health</span>
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">Access & Vehicle Footbaths</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-4">
-            Strict perimeter control featuring automated wheel-dip channels, footwear disinfection stations, and shower-in/shower-out zones.
-          </p>
-          <div class="text-[11px] font-bold text-emerald-700 uppercase">Protocol: ISO Sanitation</div>
+          <div class="p-4">
+            <h3 class="font-bold text-slate-900 text-sm">Cobb 500 Broilers</h3>
+            <p class="text-xs text-slate-500 mt-1">2.0–2.5 kg weight in 6 to 7 weeks.</p>
+          </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-          <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-900 text-xl font-bold mb-4">
-            💧
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+          <div class="h-44 bg-slate-200 overflow-hidden relative">
+            <img src="https://images.pexels.com/photos/1300361/pexels-photo-1300361.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Brooding Chicks" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Brooding</span>
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">Borehole & Filtration System</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-4">
-            Independent dual-borehole supply with automated inline chlorination and UV treatment to ensure 100% pathogen-free water.
-          </p>
-          <div class="text-[11px] font-bold text-emerald-700 uppercase">Capacity: 20,000L Reserve</div>
+          <div class="p-4">
+            <h3 class="font-bold text-slate-900 text-sm">Automated Brooding</h3>
+            <p class="text-xs text-slate-500 mt-1">Climate-monitored chick housing.</p>
+          </div>
         </div>
 
-        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6">
-          <div class="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-900 text-xl font-bold mb-4">
-            🌬️
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+          <div class="h-44 bg-slate-200 overflow-hidden relative">
+            <img src="https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Feeding Lines" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Automation</span>
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">Climate & Wind Orientation</h3>
-          <p class="text-xs text-slate-600 leading-relaxed mb-4">
-            Open-sided housing aligned East-West across the site to maximize natural cross-ventilation and eliminate heat stress.
-          </p>
-          <div class="text-[11px] font-bold text-emerald-700 uppercase">Orientation: East-West Axis</div>
+          <div class="p-4">
+            <h3 class="font-bold text-slate-900 text-sm">Pan Feeders & Drinkers</h3>
+            <p class="text-xs text-slate-500 mt-1">Efficient feed line distribution.</p>
+          </div>
         </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs hover:shadow-md transition group">
+          <div class="h-44 bg-slate-200 overflow-hidden relative">
+            <img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fresh Processed Chicken" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Wholesale</span>
+          </div>
+          <div class="p-4">
+            <h3 class="font-bold text-slate-900 text-sm">Fresh Dressed Chicken</h3>
+            <p class="text-xs text-slate-500 mt-1">Veterinary-inspected wholesale supply.</p>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <section id="blog" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+  <section id="articles" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-slate-100">
         <div>
-          <span class="text-xs uppercase font-bold text-emerald-700 tracking-wider">Agribusiness & Research</span>
-          <h2 class="text-2xl font-bold text-slate-900 mt-1">Latest Insights & Industry Updates</h2>
+          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Agribusiness Articles</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Feature Articles & Research Updates</h2>
         </div>
-        <p class="text-xs text-slate-500 mt-2 md:mt-0 max-w-sm">
-          Stay informed on production schedules, biosecurity research, and bulk pricing announcements.
-        </p>
+        <a href="#articles" class="text-xs font-bold text-poultry-red hover:underline mt-2 md:mt-0">
+          View All Articles →
+        </a>
       </div>
 
       <div class="grid md:grid-cols-3 gap-6">
@@ -259,10 +227,10 @@
                 >
               </div>
               <div class="p-5 space-y-2">
-                <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">
                   {{ post.created_at|date:"M d, Y" }} • {{ post.author }}
                 </div>
-                <h3 class="text-base font-bold text-slate-900 leading-snug hover:text-emerald-700 transition">
+                <h3 class="text-base font-bold text-slate-900 leading-snug hover:text-poultry-red transition">
                   <a href="/blog/{{ post.slug }}/">{{ post.title }}</a>
                 </h3>
                 <p class="text-xs text-slate-600 line-clamp-3">
@@ -271,81 +239,56 @@
               </div>
             </div>
             <div class="p-5 pt-0">
-              <a href="/blog/{{ post.slug }}/" class="text-xs font-bold text-emerald-700 hover:text-emerald-900 transition flex items-center gap-1">
+              <a href="/blog/{{ post.slug }}/" class="text-xs font-bold text-poultry-red hover:text-poultry-dark transition flex items-center gap-1">
                 Read Article →
               </a>
             </div>
           </article>
         {% empty %}
-          <div class="col-span-3 text-center py-8 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-            <p class="text-xs font-semibold text-slate-500">No blog articles published yet.</p>
-            <p class="text-[11px] text-slate-400 mt-1">Log in to <a href="/admin/" class="text-emerald-700 font-bold underline">Django Admin</a> to write your first article!</p>
+          <div class="col-span-3 text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-300 space-y-2">
+            <p class="text-sm font-bold text-slate-600">No blog articles published yet.</p>
+            <p class="text-xs text-slate-400">Add research posts and announcements from the <a href="/admin/" class="text-poultry-red font-bold underline">Django Admin</a> panel.</p>
           </div>
         {% endfor %}
       </div>
     </div>
   </section>
 
-  <section id="calculator" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+  <section id="calculator" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs grid md:grid-cols-2 gap-8 items-center">
       <div>
-        <h2 class="text-2xl font-bold text-slate-900 mb-2">Interactive Yield Calculator</h2>
-        <p class="text-sm text-slate-600 mb-6">Type a flock volume to calculate real-time feed inputs and harvest weight output.</p>
-        
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Flock Size (Birds)</label>
-            <input type="number" id="flockInput" value="10000" step="500" min="100" class="w-full border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-          </div>
+        <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Production Engine</span>
+        <h2 class="text-2xl font-bold text-slate-900 mb-2 mt-1">Interactive Yield Calculator</h2>
+        <p class="text-xs text-slate-600 mb-6">Type a flock volume to calculate feed input requirements and target meat output weight.</p>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Flock Size (Birds)</label>
+          <input type="number" id="flockInput" value="10000" step="500" min="100" class="w-full border border-slate-300 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-poultry-red focus:outline-none">
         </div>
       </div>
 
-      <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-6 space-y-4">
-        <h3 class="text-sm font-bold text-emerald-900 uppercase tracking-wider">Engine Results</h3>
-        <div class="flex justify-between items-center border-b border-emerald-200/60 pb-3">
-          <span class="text-sm text-slate-600">Estimated Total Feed:</span>
-          <span id="feedResult" class="text-lg font-bold text-emerald-800">33,000 kg</span>
+      <div class="bg-poultry-light border border-pink-200 rounded-xl p-6 space-y-4">
+        <h3 class="text-xs font-bold text-poultry-red uppercase tracking-wider">Calculated Output</h3>
+        <div class="flex justify-between items-center border-b border-pink-200/60 pb-3">
+          <span class="text-xs text-slate-600">Estimated Total Feed:</span>
+          <span id="feedResult" class="text-lg font-extrabold text-poultry-red">33,000 kg</span>
         </div>
-        <div class="flex justify-between items-center border-b border-emerald-200/60 pb-3">
-          <span class="text-sm text-slate-600">Estimated Meat Output:</span>
-          <span id="yieldResult" class="text-lg font-bold text-emerald-800">22,500 kg</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="operations" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
-      <h2 class="text-2xl font-bold text-slate-900 mb-1">Operations Dashboard Summary</h2>
-      <p class="text-sm text-slate-500 mb-6">Active Batch Status & Growth Trajectory</p>
-
-      <div class="space-y-4">
-        <div class="flex justify-between text-sm font-bold">
-          <span>Batch Growth Progress ({{ metric.batch_name|default:"Batch #2026-A" }})</span>
-          <span class="text-emerald-700">{{ metric.current_week|default:4 }} of {{ metric.total_weeks|default:7 }} Weeks ({{ progress_percent|default:57 }}%)</span>
-        </div>
-        <div class="w-full bg-slate-100 rounded-full h-4 overflow-hidden p-0.5 border border-slate-200">
-          <div class="bg-emerald-700 h-full rounded-full transition-all duration-500" style="width: {{ progress_percent|default:57 }}%;"></div>
-        </div>
-      </div>
-
-      <div class="mt-8 pt-6 border-t border-slate-100">
-        <h3 class="text-lg font-bold text-slate-800 mb-1">Flock Weight & FCR Progression Chart</h3>
-        <div class="w-full h-64 md:h-80">
-          <canvas id="growthChart"></canvas>
+        <div class="flex justify-between items-center border-b border-pink-200/60 pb-3">
+          <span class="text-xs text-slate-600">Estimated Meat Output:</span>
+          <span id="yieldResult" class="text-lg font-extrabold text-poultry-red">22,500 kg</span>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="preorder" class="max-w-7xl mx-auto px-6 py-6 mb-12 scroll-mt-24">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm max-w-2xl mx-auto">
-      <h2 class="text-2xl font-bold text-slate-900 mb-2 text-center">Wholesale Pre-Order Portal</h2>
-      <p class="text-sm text-slate-500 mb-6 text-center">Reserve live broilers with Mobile Money deposit (MTN MoMo / Telecel Cash).</p>
+  <section id="preorder" class="max-w-7xl mx-auto px-6 py-6 mb-12 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs max-w-2xl mx-auto">
+      <h2 class="text-2xl font-bold text-slate-900 mb-1 text-center">Wholesale Pre-Order Portal</h2>
+      <p class="text-xs text-slate-500 mb-6 text-center">Reserve live broilers with Mobile Money deposit (MTN MoMo / Telecel Cash).</p>
 
       {% if messages %}
         {% for message in messages %}
-          <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 text-sm p-4 rounded-xl mb-6 font-semibold">
+          <div class="bg-emerald-100 border border-emerald-300 text-emerald-800 text-xs p-4 rounded-xl mb-6 font-bold">
             {{ message }}
           </div>
         {% endfor %}
@@ -355,28 +298,63 @@
         {% csrf_token %}
         <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Buyer / Restaurant Name</label>
-          <input type="text" name="buyer_name" required placeholder="e.g. Accra Central Restaurant" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          <input type="text" name="buyer_name" required placeholder="e.g. Accra Central Restaurant" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-poultry-red focus:outline-none">
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Phone / MoMo Number</label>
-          <input type="text" name="phone_number" required placeholder="024 XXX XXXX" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          <input type="text" name="phone_number" required placeholder="024 XXX XXXX" class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-poultry-red focus:outline-none">
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Quantity (Minimum 50 birds)</label>
-          <input type="number" name="quantity" min="50" value="50" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none">
+          <input type="number" name="quantity" min="50" value="50" required class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-poultry-red focus:outline-none">
         </div>
         <div>
           <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Additional Notes</label>
-          <textarea name="notes" rows="3" placeholder="Specify preferred pickup or delivery dates..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-emerald-600 focus:outline-none"></textarea>
+          <textarea name="notes" rows="3" placeholder="Specify preferred pickup or delivery dates..." class="w-full border border-slate-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-poultry-red focus:outline-none"></textarea>
         </div>
 
-        <button type="submit" class="w-full bg-emerald-700 text-white font-bold py-3.5 rounded-xl hover:bg-emerald-800 transition shadow-md flex items-center justify-center gap-2">
+        <button type="submit" class="w-full bg-poultry-red text-white font-bold py-3.5 rounded-xl hover:bg-poultry-dark transition shadow-md flex items-center justify-center gap-2">
           <span>Pay Deposit via Mobile Money</span>
           <span>💳</span>
         </button>
       </form>
     </div>
   </section>
+
+  <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 pt-12 pb-8 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
+      <div>
+        <div class="text-lg font-black text-white mb-2">UG LEGON POULTRY</div>
+        <p class="text-xs text-slate-400 leading-relaxed">
+          Preliminary design & agribusiness portal for the 10,000-bird commercial broiler facility on a 2-hectare site within the University of Ghana, Legon campus.
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Useful Links</h4>
+        <ul class="space-y-2 text-xs">
+          <li><a href="#hero" class="hover:text-white transition">Home</a></li>
+          <li><a href="#knowledge" class="hover:text-white transition">Knowledge Centre</a></li>
+          <li><a href="#transparency" class="hover:text-white transition">Biosecurity Protocols</a></li>
+          <li><a href="#preorder" class="hover:text-white transition">Wholesale Pre-Orders</a></li>
+          <li><a href="/admin/" class="hover:text-white transition">Django Admin</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">Subscribe to Insights</h4>
+        <p class="text-xs text-slate-400 mb-3">Get regular harvest notifications and research reports.</p>
+        <div class="flex gap-2">
+          <input type="email" placeholder="Enter your email" class="bg-slate-800 border border-slate-700 text-white text-xs px-3 py-2 rounded-lg w-full focus:outline-none">
+          <button class="bg-poultry-red text-white text-xs font-bold px-4 py-2 rounded-lg hover:bg-poultry-dark transition">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto text-center text-[11px] text-slate-500 pt-6">
+      © 2026 UG Legon Commercial Broiler Poultry Facility. All rights reserved.
+    </div>
+  </footer>
 
   <script>
     const flockInput = document.getElementById('flockInput');
@@ -388,41 +366,6 @@
         const val = parseFloat(flockInput.value) || 0;
         feedResult.textContent = (val * 3.3).toLocaleString() + ' kg';
         yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg';
-      });
-    }
-
-    const ctx = document.getElementById('growthChart');
-    if (ctx) {
-      new Chart(ctx.getContext('2d'), {
-        type: 'line',
-        data: {
-          labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4 (Current)', 'Week 5', 'Week 6', 'Week 7'],
-          datasets: [
-            {
-              label: 'Flock Avg Weight (kg)',
-              data: [0.18, 0.45, 0.85, 1.45, 1.95, 2.30, 2.50],
-              borderColor: '#153e2b',
-              backgroundColor: 'rgba(21, 62, 43, 0.08)',
-              fill: true,
-              tension: 0.3,
-              borderWidth: 3
-            },
-            {
-              label: 'FCR Benchmark',
-              data: [0.9, 1.1, 1.3, 1.45, 1.6, 1.75, 1.85],
-              borderColor: '#f59e0b',
-              borderDash: [5, 5],
-              tension: 0.2,
-              borderWidth: 2
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { position: 'bottom' } },
-          scales: { y: { beginAtZero: true } }
-        }
       });
     }
   </script>
