@@ -10,7 +10,6 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    /* Card hover elevation effect */
     .animated-card {
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -19,7 +18,6 @@
       box-shadow: 0 12px 24px -10px rgba(128, 0, 32, 0.15);
     }
 
-    /* Custom scrollbar styling */
     ::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -31,24 +29,13 @@
       background: #800020;
       border-radius: 4px;
     }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #580016;
-    }
 
-    /* Soft entrance animation */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(12px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Modal Fade & Scale Animations */
+    .modal-backdrop {
+      transition: opacity 0.3s ease-in-out;
     }
-
-    .fade-in-up {
-      animation: fadeInUp 0.6s ease-out forwards;
+    .modal-box {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-in-out;
     }
   </style>
 
@@ -103,9 +90,9 @@
         <a href="/download-proposal/" class="bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold px-4 py-2.5 rounded-full transition duration-300 hidden sm:inline-block">
           📄 Technical Proposal PDF
         </a>
-        <a href="#preorder" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition duration-300 shadow-xs">
+        <button onclick="openOrderModal('General Wholesale Order')" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition duration-300 shadow-xs">
           Pre-Order Batch
-        </a>
+        </button>
         <a href="/inventory/" class="bg-slate-800 text-white text-xs font-bold px-3.5 py-2.5 rounded-full hover:bg-slate-900 transition duration-300">
           📊 Staff Login
         </a>
@@ -114,19 +101,19 @@
 
     <nav class="bg-poultry-red text-white text-xs font-bold overflow-x-auto whitespace-nowrap shadow-md">
       <div class="max-w-7xl mx-auto px-6 flex space-x-1 sm:space-x-3">
-        <a href="#hero" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Home</a>
-        <a href="#knowledge" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200 bg-poultry-dark/50">Knowledge Centre</a>
-        <a href="#diagnostics" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Disease Diagnostic Tool</a>
-        <a href="#pricing" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Wholesale Pricing</a>
-        <a href="#gallery" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Facility Tour</a>
-        <a href="#calculator" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Yield Engine</a>
-        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Agribusiness News</a>
-        <a href="#preorder" class="px-3.5 py-3 hover:bg-poultry-dark transition duration-200">Wholesale Orders</a>
+        <a href="#hero" class="px-3.5 py-3 hover:bg-poultry-dark transition">Home</a>
+        <a href="#knowledge" class="px-3.5 py-3 hover:bg-poultry-dark transition bg-poultry-dark/50">Knowledge Centre</a>
+        <a href="#diagnostics" class="px-3.5 py-3 hover:bg-poultry-dark transition">Disease Diagnostic Tool</a>
+        <a href="#pricing" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Pricing</a>
+        <a href="#gallery" class="px-3.5 py-3 hover:bg-poultry-dark transition">Facility Tour</a>
+        <a href="#calculator" class="px-3.5 py-3 hover:bg-poultry-dark transition">Yield Engine</a>
+        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition">Agribusiness News</a>
+        <a href="#preorder" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Orders</a>
       </div>
     </nav>
   </header>
 
-  <section id="hero" class="bg-slate-200/70 border-b border-slate-300 py-10 px-6 fade-in-up">
+  <section id="hero" class="bg-slate-200/70 border-b border-slate-300 py-10 px-6">
     <div class="max-w-4xl mx-auto text-center space-y-6">
       
       <div class="flex flex-wrap justify-center items-center gap-3 sm:gap-6 opacity-85">
@@ -134,7 +121,6 @@
         <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-700 px-3.5 py-1.5 rounded-lg shadow-2xs">MoFA GHANA</span>
         <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-700 px-3.5 py-1.5 rounded-lg shadow-2xs">COBB 500</span>
         <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-700 px-3.5 py-1.5 rounded-lg shadow-2xs">ZOETIS VET</span>
-        <span class="bg-white border border-slate-300 text-[11px] font-bold text-slate-700 px-3.5 py-1.5 rounded-lg shadow-2xs">AVIAGEN</span>
       </div>
 
       <div class="max-w-2xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md focus-within:ring-4 focus-within:ring-poultry-red/20 transition">
@@ -291,7 +277,7 @@
               <li>✔ Pickup at Legon Facility</li>
             </ul>
           </div>
-          <a href="#preorder" class="block text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Order Small Batch</a>
+          <button onclick="openOrderModal('Retail Small Batch (50-200 birds)')" class="w-full text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Order Small Batch</button>
         </div>
 
         <div class="bg-poultry-red text-white rounded-xl p-6 flex flex-col justify-between space-y-4 animated-card shadow-md relative border-2 border-poultry-accent">
@@ -305,7 +291,7 @@
               <li>✔ Split Mobile Money Deposit</li>
             </ul>
           </div>
-          <a href="#preorder" class="block text-center bg-poultry-accent text-slate-950 text-xs font-black py-2.5 rounded-lg hover:bg-amber-400 transition">Reserve Wholesale Tier</a>
+          <button onclick="openOrderModal('Wholesale Restaurant Tier (200-1000 birds)')" class="w-full text-center bg-poultry-accent text-slate-950 text-xs font-black py-2.5 rounded-lg hover:bg-amber-400 transition">Reserve Wholesale Tier</button>
         </div>
 
         <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4 animated-card">
@@ -319,7 +305,7 @@
               <li>✔ Direct Campus Freight Trucking</li>
             </ul>
           </div>
-          <a href="#preorder" class="block text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Contract Off-Take</a>
+          <button onclick="openOrderModal('Contract Distributor Tier (1000+ birds)')" class="w-full text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Contract Off-Take</button>
         </div>
 
       </div>
@@ -337,7 +323,6 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        
         <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card group">
           <div class="h-44 bg-slate-200 overflow-hidden relative">
             <img src="https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Broiler Flock" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
@@ -381,58 +366,6 @@
             <p class="text-xs text-slate-500 mt-1">Veterinary-inspected wholesale supply.</p>
           </div>
         </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="articles" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-28">
-    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
-      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-slate-100">
-        <div>
-          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Feature Articles</span>
-          <h2 class="text-2xl font-bold text-slate-900 mt-1">Latest Agribusiness News</h2>
-        </div>
-        <a href="#articles" class="text-xs font-bold text-poultry-red hover:underline mt-2 md:mt-0">
-          View All Articles →
-        </a>
-      </div>
-
-      <div class="grid md:grid-cols-3 gap-6">
-        {% for post in recent_posts %}
-          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
-            <div>
-              <div class="h-44 bg-slate-200 overflow-hidden relative">
-                <img 
-                  src="{{ post.cover_image_url|default:'https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800' }}" 
-                  alt="{{ post.title }}" 
-                  class="w-full h-full object-cover hover:scale-105 transition duration-300"
-                >
-              </div>
-              <div class="p-5 space-y-2">
-                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">
-                  {{ post.created_at|date:"M d, Y" }} • {{ post.author }}
-                </div>
-                <h3 class="text-base font-bold text-slate-900 leading-snug hover:text-poultry-red transition">
-                  <a href="/blog/{{ post.slug }}/">{{ post.title }}</a>
-                </h3>
-                <p class="text-xs text-slate-600 line-clamp-3">
-                  {{ post.summary }}
-                </p>
-              </div>
-            </div>
-            <div class="p-5 pt-0">
-              <a href="/blog/{{ post.slug }}/" class="text-xs font-bold text-poultry-red hover:text-poultry-dark transition flex items-center gap-1">
-                Read Article →
-              </a>
-            </div>
-          </article>
-        {% empty %}
-          <div class="col-span-3 text-center py-10 bg-slate-50 rounded-xl border border-dashed border-slate-300 space-y-2">
-            <p class="text-sm font-bold text-slate-600">No blog articles published yet.</p>
-            <p class="text-xs text-slate-400">Add research posts and announcements from the <a href="/admin/" class="text-poultry-red font-bold underline">Django Admin</a> panel.</p>
-          </div>
-        {% endfor %}
       </div>
     </div>
   </section>
@@ -504,12 +437,47 @@
     </div>
   </section>
 
-  <a href="https://wa.me/233240000000?text=Hello%20UG%20Legon%20Poultry,%20I%20want%20to%20inquire%20about%20wholesale%20broiler%20orders" 
-     target="_blank" 
-     class="fixed bottom-6 right-6 bg-emerald-600 text-white p-3.5 px-4 rounded-full shadow-lg z-50 hover:bg-emerald-700 transition flex items-center gap-2 text-xs font-bold animated-card">
+  <div id="whatsappModal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-4 hidden modal-backdrop opacity-0">
+    <div class="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl modal-box transform scale-95 space-y-4 relative">
+      <button onclick="closeOrderModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl font-bold p-2">✕</button>
+
+      <div class="flex items-center gap-3 border-b border-slate-100 pb-4">
+        <div class="w-12 h-12 bg-emerald-100 rounded-2xl flex items-center justify-center text-emerald-800 text-2xl font-bold">
+          💬
+        </div>
+        <div>
+          <h3 class="text-base font-bold text-slate-900">Direct WhatsApp Order</h3>
+          <p class="text-xs text-slate-500" id="modalTierTitle">Reserve Batch Order</p>
+        </div>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Your Name / Restaurant Name</label>
+          <input type="text" id="modalBuyerName" placeholder="e.g. Legon Kitchen" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-poultry-red focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Required Quantity (Birds)</label>
+          <input type="number" id="modalQuantity" value="100" min="20" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-poultry-red focus:outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Preferred Delivery / Pickup Date</label>
+          <input type="date" id="modalDate" class="w-full border border-slate-300 rounded-xl p-2.5 text-xs focus:ring-2 focus:ring-poultry-red focus:outline-none">
+        </div>
+      </div>
+
+      <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 text-white font-bold py-3 rounded-xl hover:bg-emerald-700 transition shadow-md flex items-center justify-center gap-2 text-xs">
+        <span>Send WhatsApp Order</span>
+        <span>📲</span>
+      </button>
+    </div>
+  </div>
+
+  <button onclick="openOrderModal('General Wholesale Inquiries')" 
+     class="fixed bottom-6 right-6 bg-emerald-600 text-white p-3.5 px-4 rounded-full shadow-lg z-40 hover:bg-emerald-700 transition flex items-center gap-2 text-xs font-bold animated-card">
     <span>💬</span>
     <span>Wholesale WhatsApp</span>
-  </a>
+  </button>
 
   <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 pt-12 pb-8 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
@@ -547,6 +515,7 @@
   </footer>
 
   <script>
+    // Yield Calculator Logic
     const flockInput = document.getElementById('flockInput');
     const feedResult = document.getElementById('feedResult');
     const yieldResult = document.getElementById('yieldResult');
@@ -559,7 +528,7 @@
       });
     }
 
-    // 🩺 INTERACTIVE DISEASE DIAGNOSTIC ENGINE
+    // Disease Diagnostic Engine Logic
     const symptomChecks = document.querySelectorAll('.symptom-check');
     const diagnosticResults = document.getElementById('diagnosticResults');
     const resetDiagnostics = document.getElementById('resetDiagnostics');
@@ -653,6 +622,40 @@
         symptomChecks.forEach(c => c.checked = false);
         updateDiagnostics();
       });
+    }
+
+    // 📱 WHATSAPP MODAL POPUP LOGIC
+    const modal = document.getElementById('whatsappModal');
+    const modalBox = modal.querySelector('.modal-box');
+    let currentTier = 'General Wholesale Order';
+
+    function openOrderModal(tierName) {
+      currentTier = tierName;
+      document.getElementById('modalTierTitle').textContent = 'Tier: ' + tierName;
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modalBox.classList.remove('scale-95');
+      }, 10);
+    }
+
+    function closeOrderModal() {
+      modal.classList.add('opacity-0');
+      modalBox.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+
+    function sendWhatsAppOrder() {
+      const buyerName = document.getElementById('modalBuyerName').value || 'Valued Customer';
+      const quantity = document.getElementById('modalQuantity').value || '100';
+      const date = document.getElementById('modalDate').value || 'As soon as possible';
+
+      const message = `Hello UG Legon Poultry Team! 👋%0A%0AI would like to place a broiler order:%0A• *Buyer Name:* ${encodeURIComponent(buyerName)}%0A• *Package Tier:* ${encodeURIComponent(currentTier)}%0A• *Quantity:* ${quantity} birds%0A• *Preferred Date:* ${date}%0A%0APlease confirm availability and MoMo deposit details.`;
+
+      window.open(`https://wa.me/233240000000?text=${message}`, '_blank');
+      closeOrderModal();
     }
   </script>
 
