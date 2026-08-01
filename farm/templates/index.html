@@ -190,6 +190,103 @@
     </div>
   </section>
 
+  <section id="blog" class="max-w-7xl mx-auto px-6 py-10 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-slate-100">
+        <div>
+          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Research & Agribusiness Hub</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Dedicated Agribusiness Blog & News</h2>
+        </div>
+        <a href="/admin/blog/post/add/" class="inline-flex items-center gap-1.5 text-xs font-bold bg-poultry-light text-poultry-red px-4 py-2 rounded-full border border-pink-200 hover:bg-pink-100 transition mt-2 md:mt-0">
+          <span>✏️ Publish New Article</span>
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        {% for post in recent_posts %}
+          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
+            <div>
+              <div class="h-44 bg-slate-200 overflow-hidden relative">
+                <img 
+                  src="{{ post.cover_image_url|default:'https://images.pexels.com/photos/1769279/pexels-photo-1769279.jpeg?auto=compress&cs=tinysrgb&w=800' }}" 
+                  alt="{{ post.title }}" 
+                  class="w-full h-full object-cover hover:scale-105 transition duration-300"
+                >
+              </div>
+              <div class="p-5 space-y-2">
+                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">
+                  {{ post.created_at|date:"M d, Y" }} • {{ post.author }}
+                </div>
+                <h3 class="text-base font-bold text-slate-900 leading-snug hover:text-poultry-red transition">
+                  <a href="/blog/{{ post.slug }}/">{{ post.title }}</a>
+                </h3>
+                <p class="text-xs text-slate-600 line-clamp-3">
+                  {{ post.summary }}
+                </p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <a href="/blog/{{ post.slug }}/" class="text-xs font-bold text-poultry-red hover:text-poultry-dark transition flex items-center gap-1">
+                Read Full Article →
+              </a>
+            </div>
+          </article>
+        {% empty %}
+          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
+            <div>
+              <div class="h-44 bg-slate-200 overflow-hidden relative">
+                <img src="https://images.pexels.com/photos/2255459/pexels-photo-2255459.jpeg?auto=compress&cs=tinysrgb&w=800" alt="FCR Management" class="w-full h-full object-cover">
+                <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Management</span>
+              </div>
+              <div class="p-5 space-y-2">
+                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">AUG 2026 • UG Legon Team</div>
+                <h3 class="text-base font-bold text-slate-900 leading-snug">Optimizing Feed Conversion Ratio for Cobb 500 Broilers</h3>
+                <p class="text-xs text-slate-600">Discover how automated pan feeders and controlled climate monitoring help maintain a 1.45 FCR target in tropical Ghana.</p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <a href="/admin/blog/post/add/" class="text-xs font-bold text-poultry-red hover:underline flex items-center gap-1">Add This to Database →</a>
+            </div>
+          </article>
+
+          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
+            <div>
+              <div class="h-44 bg-slate-200 overflow-hidden relative">
+                <img src="https://images.pexels.com/photos/1300375/pexels-photo-1300375.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Biosecurity Protocols" class="w-full h-full object-cover">
+                <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Biosecurity</span>
+              </div>
+              <div class="p-5 space-y-2">
+                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">AUG 2026 • Vet Research Unit</div>
+                <h3 class="text-base font-bold text-slate-900 leading-snug">Essential Biosecurity Standards for Commercial Broilers</h3>
+                <p class="text-xs text-slate-600">A guide to perimeter wheel dips, borehole UV filtration, and shower-in sanitation protocols for zero-antibiotic farming.</p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <a href="/admin/blog/post/add/" class="text-xs font-bold text-poultry-red hover:underline flex items-center gap-1">Add This to Database →</a>
+            </div>
+          </article>
+
+          <article class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-xs animated-card flex flex-col justify-between">
+            <div>
+              <div class="h-44 bg-slate-200 overflow-hidden relative">
+                <img src="https://images.pexels.com/photos/616354/pexels-photo-616354.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wholesale Orders" class="w-full h-full object-cover">
+                <span class="absolute top-3 left-3 bg-poultry-red text-white text-[10px] font-bold px-2 py-0.5 rounded">Wholesale</span>
+              </div>
+              <div class="p-5 space-y-2">
+                <div class="text-[10px] font-bold text-poultry-red uppercase tracking-wider">AUG 2026 • Commercial Sales</div>
+                <h3 class="text-base font-bold text-slate-900 leading-snug">Wholesale Pre-Orders Open for Batch #2026-A Broilers</h3>
+                <p class="text-xs text-slate-600">Restaurants and food distributors across Accra can now reserve live and dressed Cobb 500 broilers via Mobile Money.</p>
+              </div>
+            </div>
+            <div class="p-5 pt-0">
+              <a href="/admin/blog/post/add/" class="text-xs font-bold text-poultry-red hover:underline flex items-center gap-1">Add This to Database →</a>
+            </div>
+          </article>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
   <section id="diagnostics" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-28">
     <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-100">
@@ -245,7 +342,7 @@
 
           <div class="mt-6 pt-4 border-t border-slate-200 text-[11px] text-slate-500 flex justify-between items-center">
             <span>Note: Always consult a certified MoFA veterinary officer for laboratory confirmation.</span>
-            <a href="https://wa.me/233240000000?text=Hello%20UG%20Legon%20Vet%20Team,%20I%20need%20assistance%20with%20flock%20health" target="_blank" class="font-bold text-poultry-red hover:underline">
+            <a href="https://wa.me/233551421164?text=Hello%20UG%20Legon%20Vet%20Team,%20I%20need%20assistance%20with%20flock%20health" target="_blank" class="font-bold text-poultry-red hover:underline">
               Contact Vet Officer →
             </a>
           </div>
