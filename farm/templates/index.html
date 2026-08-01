@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UG Legon Poultry | Knowledge Centre & Commercial Portal</title>
+  <title>The Poultry Site | UG Legon Commercial Portal & Knowledge Centre</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,7 +15,7 @@
         extend: {
           colors: {
             poultry: {
-              red: '#800020',       /* Burgundy / Deep Wine Red like The Poultry Site */
+              red: '#800020',       /* Burgundy / Deep Wine Red */
               dark: '#580016',
               light: '#fdf2f4',
               accent: '#f59e0b',
@@ -29,6 +29,21 @@
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans antialiased">
 
+  <div class="bg-slate-900 text-white text-[11px] py-2 px-6 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+      <div class="flex items-center gap-3">
+        <span class="bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider border border-emerald-500/30 flex items-center gap-1">
+          <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping"></span> Live Batch Stock
+        </span>
+        <span class="text-slate-300">Active Harvest Batch #2026-A: <strong>10,000 Cobb 500 Broilers</strong> • Target Weight: <strong>2.25 kg</strong></span>
+      </div>
+      <div class="flex items-center gap-4 text-slate-300 font-semibold">
+        <span>📍 UG Legon Campus, Accra</span>
+        <span>📞 Sales: <strong>+233 24 XXX XXXX</strong></span>
+      </div>
+    </div>
+  </div>
+
   <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
     <div class="max-w-7xl mx-auto px-6 py-3.5 flex justify-between items-center">
       <div class="flex items-center space-x-3">
@@ -37,7 +52,7 @@
           <span>The Poultry Site</span>
         </a>
         <span class="text-xs font-bold text-slate-400 uppercase tracking-widest hidden lg:inline border-l border-slate-300 pl-3">
-          UG Legon Facility
+          UG Legon Commercial Hub
         </span>
       </div>
 
@@ -48,7 +63,7 @@
         <a href="#preorder" class="bg-poultry-red text-white text-xs font-bold px-4 py-2.5 rounded-full hover:bg-poultry-dark transition shadow-xs">
           Pre-Order Batch
         </a>
-        <a href="/inventory/" class="bg-slate-800 text-white text-xs font-bold px-3 py-2.5 rounded-full hover:bg-slate-900 transition">
+        <a href="/inventory/" class="bg-slate-800 text-white text-xs font-bold px-3.5 py-2.5 rounded-full hover:bg-slate-900 transition">
           📊 Staff Login
         </a>
       </div>
@@ -58,20 +73,21 @@
       <div class="max-w-7xl mx-auto px-6 flex space-x-1 sm:space-x-3">
         <a href="#hero" class="px-3.5 py-3 hover:bg-poultry-dark transition">Home</a>
         <a href="#knowledge" class="px-3.5 py-3 hover:bg-poultry-dark transition bg-poultry-dark/50">Knowledge Centre</a>
-        <a href="#specs" class="px-3.5 py-3 hover:bg-poultry-dark transition">Genetics & Breeding</a>
-        <a href="#transparency" class="px-3.5 py-3 hover:bg-poultry-dark transition">Health & Disease</a>
+        <a href="#diagnostics" class="px-3.5 py-3 hover:bg-poultry-dark transition">Disease Diagnostic Tool</a>
+        <a href="#pricing" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Pricing</a>
+        <a href="#gallery" class="px-3.5 py-3 hover:bg-poultry-dark transition">Facility Tour</a>
         <a href="#calculator" class="px-3.5 py-3 hover:bg-poultry-dark transition">Yield Engine</a>
-        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition">Latest News</a>
+        <a href="#articles" class="px-3.5 py-3 hover:bg-poultry-dark transition">Agribusiness News</a>
         <a href="#preorder" class="px-3.5 py-3 hover:bg-poultry-dark transition">Wholesale Orders</a>
       </div>
     </nav>
 
     <div class="bg-slate-100 text-slate-600 text-[11px] font-semibold border-b border-slate-200 px-6 py-1.5 hidden md:block">
       <div class="max-w-7xl mx-auto flex space-x-6">
-        <span class="text-slate-400 font-bold uppercase tracking-wider">Focus Regions:</span>
-        <a href="#" class="text-poultry-red font-bold hover:underline">Africa (Ghana Focus)</a>
-        <a href="#" class="hover:text-slate-900 transition">West Africa Trade</a>
-        <a href="#" class="hover:text-slate-900 transition">Sub-Saharan Markets</a>
+        <span class="text-slate-400 font-bold uppercase tracking-wider">Focus Markets:</span>
+        <a href="#" class="text-poultry-red font-bold hover:underline">Accra Wholesale Region</a>
+        <a href="#" class="hover:text-slate-900 transition">Hotel & Restaurant Supply</a>
+        <a href="#" class="hover:text-slate-900 transition">Cold Chain Logistics</a>
       </div>
     </div>
   </header>
@@ -90,7 +106,7 @@
       <div class="max-w-2xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md">
         <input 
           type="text" 
-          placeholder="Search articles, news, and more..." 
+          placeholder="Search articles, diseases, bulk prices, and biosecurity..." 
           class="w-full px-6 py-3.5 text-sm text-slate-700 focus:outline-none"
         >
         <button class="bg-poultry-red text-white font-bold text-xs px-6 py-4 hover:bg-poultry-dark transition flex items-center gap-1.5 whitespace-nowrap">
@@ -104,7 +120,7 @@
           Knowledge Centre & Commercial Portal
         </h1>
         <p class="text-slate-600 text-xs sm:text-sm max-w-2xl mx-auto mt-2">
-          UG Legon 10,000-bird commercial broiler facility design, biosecurity standards, and batch inventory hub.
+          Commercial broiler production, wholesale bulk supply, and veterinary research hub for the University of Ghana, Legon.
         </p>
       </div>
 
@@ -127,12 +143,12 @@
         <p class="text-[11px] text-slate-500 mt-1">Vaccination & disease management</p>
       </a>
 
-      <a href="#specs" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
+      <a href="#diagnostics" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
         <div class="w-16 h-16 bg-poultry-light rounded-full flex items-center justify-center text-poultry-red text-3xl mb-3 group-hover:scale-110 transition">
-          🐥
+          🩺
         </div>
         <h3 class="font-bold text-slate-900 text-sm leading-snug">Poultry Disease Guide</h3>
-        <p class="text-[11px] text-slate-500 mt-1">Symptoms & diagnostic controls</p>
+        <p class="text-[11px] text-slate-500 mt-1">Interactive symptom checker & diagnostics</p>
       </a>
 
       <a href="#calculator" class="bg-white border border-slate-200 rounded-2xl p-6 shadow-xs hover:shadow-md transition text-center group flex flex-col items-center">
@@ -154,7 +170,7 @@
     </div>
   </section>
 
-  <section id="diagnostics" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-28">
+  <section id="diagnostics" class="max-w-7xl mx-auto px-6 py-6 scroll-mt-28">
     <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
       <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 pb-4 border-b border-slate-100">
         <div>
@@ -214,6 +230,64 @@
             </a>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing" class="max-w-7xl mx-auto px-6 py-8 scroll-mt-28">
+    <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-xs">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-4 border-b border-slate-100">
+        <div>
+          <span class="text-xs uppercase font-extrabold text-poultry-red tracking-wider">Commercial Distribution</span>
+          <h2 class="text-2xl font-bold text-slate-900 mt-1">Wholesale & Off-Taker Rates</h2>
+        </div>
+        <p class="text-xs text-slate-500 mt-2 md:mt-0">Discounted pricing for restaurants, hotels, and processing plants.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4">
+          <div>
+            <span class="bg-slate-200 text-slate-700 text-[10px] font-extrabold px-2.5 py-1 rounded uppercase">Retail / Small Order</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-3">50 – 200 Birds</h3>
+            <div class="text-2xl font-black text-poultry-red mt-2">GHS 55 <span class="text-xs font-normal text-slate-500">/ bird</span></div>
+            <ul class="text-xs text-slate-600 space-y-2 mt-4">
+              <li>✔ Live or Dressed Broilers</li>
+              <li>✔ MoFA Vet Inspection Tag</li>
+              <li>✔ Pickup at Legon Facility</li>
+            </ul>
+          </div>
+          <a href="#preorder" class="block text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Order Small Batch</a>
+        </div>
+
+        <div class="bg-poultry-red text-white rounded-xl p-6 flex flex-col justify-between space-y-4 shadow-md relative border-2 border-poultry-accent">
+          <div>
+            <span class="bg-poultry-accent text-slate-950 text-[10px] font-black px-2.5 py-1 rounded uppercase tracking-wider">Most Popular</span>
+            <h3 class="text-lg font-bold mt-3">200 – 1,000 Birds</h3>
+            <div class="text-2xl font-black text-amber-300 mt-2">GHS 48 <span class="text-xs font-normal text-slate-200">/ bird</span></div>
+            <ul class="text-xs text-slate-200 space-y-2 mt-4">
+              <li>✔ Wholesale Restaurant Tier</li>
+              <li>✔ Scheduled Cold Chain Logistics</li>
+              <li>✔ Split Mobile Money Deposit</li>
+            </ul>
+          </div>
+          <a href="#preorder" class="block text-center bg-poultry-accent text-slate-950 text-xs font-black py-2.5 rounded-lg hover:bg-amber-400 transition">Reserve Wholesale Tier</a>
+        </div>
+
+        <div class="bg-slate-50 border border-slate-200 rounded-xl p-6 flex flex-col justify-between space-y-4">
+          <div>
+            <span class="bg-slate-200 text-slate-700 text-[10px] font-extrabold px-2.5 py-1 rounded uppercase">Contract Distributor</span>
+            <h3 class="text-lg font-bold text-slate-900 mt-3">1,000+ Birds</h3>
+            <div class="text-2xl font-black text-poultry-red mt-2">GHS 42 <span class="text-xs font-normal text-slate-500">/ bird</span></div>
+            <ul class="text-xs text-slate-600 space-y-2 mt-4">
+              <li>✔ Dedicated Batch Off-Take</li>
+              <li>✔ Guaranteed Cycle Scheduling</li>
+              <li>✔ Direct Campus Freight Trucking</li>
+            </ul>
+          </div>
+          <a href="#preorder" class="block text-center bg-slate-800 text-white text-xs font-bold py-2.5 rounded-lg hover:bg-slate-900 transition">Contract Off-Take</a>
+        </div>
+
       </div>
     </div>
   </section>
@@ -396,6 +470,13 @@
     </div>
   </section>
 
+  <a href="https://wa.me/233240000000?text=Hello%20UG%20Legon%20Poultry,%20I%20want%20to%20inquire%20about%20wholesale%20broiler%20orders" 
+     target="_blank" 
+     class="fixed bottom-6 right-6 bg-emerald-600 text-white p-3.5 px-4 rounded-full shadow-lg z-50 hover:bg-emerald-700 transition flex items-center gap-2 text-xs font-bold">
+    <span>💬</span>
+    <span>Wholesale WhatsApp</span>
+  </a>
+
   <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 pt-12 pb-8 px-6">
     <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 border-b border-slate-800">
       <div>
@@ -410,7 +491,7 @@
         <ul class="space-y-2 text-xs">
           <li><a href="#hero" class="hover:text-white transition">Home</a></li>
           <li><a href="#knowledge" class="hover:text-white transition">Knowledge Centre</a></li>
-          <li><a href="#transparency" class="hover:text-white transition">Biosecurity Protocols</a></li>
+          <li><a href="#pricing" class="hover:text-white transition">Wholesale Rates</a></li>
           <li><a href="#preorder" class="hover:text-white transition">Wholesale Pre-Orders</a></li>
           <li><a href="/admin/" class="hover:text-white transition">Django Admin</a></li>
         </ul>
@@ -432,6 +513,18 @@
   </footer>
 
   <script>
+    const flockInput = document.getElementById('flockInput');
+    const feedResult = document.getElementById('feedResult');
+    const yieldResult = document.getElementById('yieldResult');
+
+    if (flockInput) {
+      flockInput.addEventListener('input', () => {
+        const val = parseFloat(flockInput.value) || 0;
+        feedResult.textContent = (val * 3.3).toLocaleString() + ' kg';
+        yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg';
+      });
+    }
+
     // 🩺 INTERACTIVE DISEASE DIAGNOSTIC ENGINE
     const symptomChecks = document.querySelectorAll('.symptom-check');
     const diagnosticResults = document.getElementById('diagnosticResults');
@@ -442,29 +535,29 @@
         name: "Newcastle Disease (ND)",
         severity: "HIGH - Highly Contagious Viral Infection",
         symptomsRequired: ["respiratory", "paralysis", "feed_drop"],
-        description: "A acute viral disease affecting respiratory, nervous, and digestive systems.",
-        action: "Isolate affected birds immediately. Enforce strict quarantine and notify MoFA veterinary officers for emergency vaccination protocols."
+        description: "Acute viral disease affecting respiratory, nervous, and digestive systems.",
+        action: "Isolate affected birds immediately. Enforce quarantine and notify MoFA veterinary officers."
       },
       {
         name: "Coccidiosis",
         severity: "MODERATE TO HIGH - Parasitic Infection",
         symptomsRequired: ["bloody_stool", "feed_drop"],
-        description: "Intestinal disease caused by protozoan parasites affecting litter hygiene and gut health.",
-        action: "Administer anticoccidial medications via water lines. Replace wet litter and thoroughly disinfect feeder zones."
+        description: "Intestinal disease caused by protozoan parasites affecting litter hygiene.",
+        action: "Administer anticoccidial medications via water lines. Replace wet litter."
       },
       {
         name: "Infectious Coryza",
         severity: "MODERATE - Bacterial Respiratory Disease",
         symptomsRequired: ["respiratory", "swollen_head"],
-        description: "Bacterial infection causing facial edema, nasal discharge, and reduced growth rates.",
-        action: "Administer vet-prescribed antibiotic treatment. Ensure proper cross-ventilation across open-sided housing."
+        description: "Bacterial infection causing facial edema, nasal discharge, and reduced growth.",
+        action: "Administer vet-prescribed antibiotics. Ensure proper cross-ventilation across housing."
       },
       {
-        name: "Infectious Bursal Disease (Gumboro / IBD)",
+        name: "Infectious Bursal Disease (Gumboro)",
         severity: "HIGH - Immunosuppressive Viral Infection",
         symptomsRequired: ["paralysis", "feed_drop"],
-        description: "Targeting young chicks, causing severe immunosuppression and vulnerability to secondary infections.",
-        action: "Review chick vaccination schedules, increase electrolyte water supplements, and sanitize footbath stations."
+        description: "Targeting young chicks, causing severe immunosuppression.",
+        action: "Review chick vaccination schedules, increase electrolyte supplements, and sanitize footbaths."
       }
     ];
 
@@ -492,8 +585,8 @@
         diagnosticResults.innerHTML = `
           <div class="bg-amber-50 border border-amber-200 text-amber-900 p-4 rounded-xl text-xs font-medium space-y-1">
             <h4 class="font-bold text-sm">Non-Specific Symptoms Detected</h4>
-            <p>Monitored symptoms suggest general flock stress, heat exhaustion, or early-stage feed transit issues.</p>
-            <p class="text-[11px] text-amber-700 font-bold mt-2">Recommended Step: Monitor water line pressure and check house ambient temperature.</p>
+            <p>Monitored symptoms suggest general flock stress or early-stage feed transit issues.</p>
+            <p class="text-[11px] text-amber-700 font-bold mt-2">Recommended Step: Check water pressure and ambient temperature.</p>
           </div>
         `;
         return;
@@ -525,17 +618,6 @@
       resetDiagnostics.addEventListener('click', () => {
         symptomChecks.forEach(c => c.checked = false);
         updateDiagnostics();
-      });
-    }
-    const flockInput = document.getElementById('flockInput');
-    const feedResult = document.getElementById('feedResult');
-    const yieldResult = document.getElementById('yieldResult');
-
-    if (flockInput) {
-      flockInput.addEventListener('input', () => {
-        const val = parseFloat(flockInput.value) || 0;
-        feedResult.textContent = (val * 3.3).toLocaleString() + ' kg';
-        yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg';
       });
     }
   </script>
