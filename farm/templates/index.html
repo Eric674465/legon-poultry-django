@@ -135,6 +135,20 @@
         </button>
       </div>
 
+      <form action="/blog/" method="GET" class="max-w-2xl mx-auto flex items-center bg-white border-2 border-poultry-red rounded-full overflow-hidden shadow-md focus-within:ring-4 focus-within:ring-poultry-red/20 transition">
+        <input 
+          type="text" 
+          name="q"
+          id="siteSearchInput"
+          placeholder="Search articles, diseases, bulk prices, and biosecurity..." 
+          class="w-full px-6 py-3.5 text-sm text-slate-700 focus:outline-none"
+        >
+        <button type="submit" class="bg-poultry-red text-white font-bold text-xs px-6 py-4 hover:bg-poultry-dark transition flex items-center gap-1.5 whitespace-nowrap">
+          <span>Search</span>
+          <span>🔍</span>
+        </button>
+      </form>
+
       <div>
         <h1 class="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
           Knowledge Centre & Commercial Portal
@@ -849,6 +863,27 @@
       closeOrderModal();
     }
   </script>
+
+  // 🔍 LIVE IN-PAGE SEARCH ENGINE
+    const searchInput = document.getElementById('siteSearchInput');
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        
+        // Target cards across blog, diagnostics, and pricing
+        const searchableCards = document.querySelectorAll('#blog article, #pricing .animated-card, #gallery .animated-card');
+
+        searchableCards.forEach(card => {
+          const content = card.textContent.toLowerCase();
+          if (query === '' || content.includes(query)) {
+            card.style.display = ''; // Show card
+          } else {
+            card.style.display = 'none'; // Hide non-matching card
+          }
+        });
+      });
+    }
 
 </body>
 </html>
