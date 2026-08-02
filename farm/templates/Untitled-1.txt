@@ -1,0 +1,7 @@
+C:\Users\aduer>cd C:\Users\aduer\OneDrive\Documents\Desktop\legon_poultry_django
+
+C:\Users\aduer\OneDrive\Documents\Desktop\legon_poultry_django>venv/Scripts/activate
+'venv' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\aduer\OneDrive\Documents\Desktop\legon_poultry_django>venv\Scripts\activate
