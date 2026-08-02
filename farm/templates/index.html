@@ -758,113 +758,75 @@ body {
     </div>
   </footer>
 
-  </script> 
-    function changeLanguage(lang) {
-      if (!translations[lang]) return;
+  <script>
+    // 🌐 Multi-Language Change Function
+    function changeLanguage(lang) { 
+      if (typeof translations === 'undefined' || !translations[lang]) return; 
+      document.querySelectorAll('[data-lang-key]').forEach(element => { 
+        const key = element.getAttribute('data-lang-key'); 
+        if (translations[lang][key]) { 
+          element.textContent = translations[lang][key]; 
+        } 
+      }); 
+      localStorage.setItem('preferred_language', lang); 
+    } 
 
-      document.querySelectorAll('[data-lang-key]').forEach(element => {
-        const key = element.getAttribute('data-lang-key');
-        if (translations[lang][key]) {
-          element.textContent = translations[lang][key];
-        }
-      });
+    document.addEventListener('DOMContentLoaded', () => { 
+      const savedLang = localStorage.getItem('preferred_language') || 'en'; 
+      const selector = document.getElementById('languageSelector'); 
+      if (selector) { 
+        selector.value = savedLang; 
+        changeLanguage(savedLang); 
+      } 
+    }); 
 
-      localStorage.setItem('preferred_language', lang);
-    }
+    // 🌾 Yield Calculator Logic
+    const flockInput = document.getElementById('flockInput'); 
+    const feedResult = document.getElementById('feedResult'); 
+    const yieldResult = document.getElementById('yieldResult'); 
+    if (flockInput) { 
+      flockInput.addEventListener('input', () => { 
+        const val = parseFloat(flockInput.value) || 0; 
+        feedResult.textContent = (val * 3.3).toLocaleString() + ' kg'; 
+        yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg'; 
+      }); 
+    } 
 
-    document.addEventListener('DOMContentLoaded', () => {
-      const savedLang = localStorage.getItem('preferred_language') || 'en';
-      const selector = document.getElementById('languageSelector');
-      if (selector) {
-        selector.value = savedLang;
-        changeLanguage(savedLang);
-      }
-    });
+    // 🩺 Disease Diagnostic Engine Logic
+    const symptomChecks = document.querySelectorAll('.symptom-check'); 
+    const diagnosticResults = document.getElementById('diagnosticResults'); 
+    const resetDiagnostics = document.getElementById('resetDiagnostics'); 
 
-  
-    // Yield Calculator Logic
-    const flockInput = document.getElementById('flockInput');
-    const feedResult = document.getElementById('feedResult');
-    const yieldResult = document.getElementById('yieldResult');
+    const diseasesDB = [ 
+      { name: "Newcastle Disease (ND)", severity: "HIGH - Highly Contagious Viral Infection", symptomsRequired: ["respiratory", "paralysis", "feed_drop"], description: "Acute viral disease affecting respiratory, nervous, and digestive systems.", action: "Isolate affected birds immediately. Enforce quarantine and notify MoFA veterinary officers." }, 
+      { name: "Coccidiosis", severity: "MODERATE TO HIGH - Parasitic Infection", symptomsRequired: ["bloody_stool", "feed_drop"], description: "Intestinal disease caused by protozoan parasites affecting litter hygiene.", action: "Administer anticoccidial medications via water lines. Replace wet litter." }, 
+      { name: "Infectious Coryza", severity: "MODERATE - Bacterial Respiratory Disease", symptomsRequired: ["respiratory", "swollen_head"], description: "Bacterial infection causing facial edema, nasal discharge, and reduced growth.", action: "Administer vet-prescribed antibiotics. Ensure proper cross-ventilation across housing." }, 
+      { name: "Infectious Bursal Disease (Gumboro)", severity: "HIGH - Immunosuppressive Viral Infection", symptomsRequired: ["paralysis", "feed_drop"], description: "Targeting young chicks, causing severe immunosuppression.", action: "Review chick vaccination schedules, increase electrolyte supplements, and sanitize footbaths." } 
+    ]; 
 
-    if (flockInput) {
-      flockInput.addEventListener('input', () => {
-        const val = parseFloat(flockInput.value) || 0;
-        feedResult.textContent = (val * 3.3).toLocaleString() + ' kg';
-        yieldResult.textContent = (val * 2.25).toLocaleString() + ' kg';
-      });
-    }
-
-    // Disease Diagnostic Engine Logic
-    const symptomChecks = document.querySelectorAll('.symptom-check');
-    const diagnosticResults = document.getElementById('diagnosticResults');
-    const resetDiagnostics = document.getElementById('resetDiagnostics');
-
-    const diseasesDB = [
-      {
-        name: "Newcastle Disease (ND)",
-        severity: "HIGH - Highly Contagious Viral Infection",
-        symptomsRequired: ["respiratory", "paralysis", "feed_drop"],
-        description: "Acute viral disease affecting respiratory, nervous, and digestive systems.",
-        action: "Isolate affected birds immediately. Enforce quarantine and notify MoFA veterinary officers."
-      },
-      {
-        name: "Coccidiosis",
-        severity: "MODERATE TO HIGH - Parasitic Infection",
-        symptomsRequired: ["bloody_stool", "feed_drop"],
-        description: "Intestinal disease caused by protozoan parasites affecting litter hygiene.",
-        action: "Administer anticoccidial medications via water lines. Replace wet litter."
-      },
-      {
-        name: "Infectious Coryza",
-        severity: "MODERATE - Bacterial Respiratory Disease",
-        symptomsRequired: ["respiratory", "swollen_head"],
-        description: "Bacterial infection causing facial edema, nasal discharge, and reduced growth.",
-        action: "Administer vet-prescribed antibiotics. Ensure proper cross-ventilation across housing."
-      },
-      {
-        name: "Infectious Bursal Disease (Gumboro)",
-        severity: "HIGH - Immunosuppressive Viral Infection",
-        symptomsRequired: ["paralysis", "feed_drop"],
-        description: "Targeting young chicks, causing severe immunosuppression.",
-        action: "Review chick vaccination schedules, increase electrolyte supplements, and sanitize footbaths."
-      }
-    ];
-
-    function updateDiagnostics() {
-      const selectedSymptoms = Array.from(symptomChecks)
-        .filter(i => i.checked)
-        .map(i => i.value);
-
-      if (selectedSymptoms.length === 0) {
+    function updateDiagnostics() { 
+      const selectedSymptoms = Array.from(symptomChecks).filter(i => i.checked).map(i => i.value); 
+      if (selectedSymptoms.length === 0) { 
         diagnosticResults.innerHTML = `
           <div class="text-center py-10 space-y-2">
             <div class="text-4xl">🔍</div>
             <p class="text-xs font-bold text-slate-600">Select one or more symptoms on the left to generate diagnostic insights.</p>
             <p class="text-[11px] text-slate-400">Diagnostic models cover Newcastle Disease, Coccidiosis, Gumboro (IBD), and Infectious Coryza.</p>
-          </div>
-        `;
-        return;
-      }
-
-      const matchedDiseases = diseasesDB.filter(disease => 
-        disease.symptomsRequired.some(sym => selectedSymptoms.includes(sym))
-      );
-
-      if (matchedDiseases.length === 0) {
+          </div>`; 
+        return; 
+      } 
+      const matchedDiseases = diseasesDB.filter(disease => disease.symptomsRequired.some(sym => selectedSymptoms.includes(sym))); 
+      if (matchedDiseases.length === 0) { 
         diagnosticResults.innerHTML = `
           <div class="bg-amber-50 border border-amber-200 text-amber-900 p-4 rounded-xl text-xs font-medium space-y-1">
             <h4 class="font-bold text-sm">Non-Specific Symptoms Detected</h4>
             <p>Monitored symptoms suggest general flock stress or early-stage feed transit issues.</p>
             <p class="text-[11px] text-amber-700 font-bold mt-2">Recommended Step: Check water pressure and ambient temperature.</p>
-          </div>
-        `;
-        return;
-      }
-
-      let htmlContent = '<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Potential Disease Matches:</h4>';
-
-      matchedDiseases.forEach(d => {
+          </div>`; 
+        return; 
+      } 
+      let htmlContent = '<h4 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2">Potential Disease Matches:</h4>'; 
+      matchedDiseases.forEach(d => { 
         htmlContent += `
           <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2 shadow-2xs">
             <div class="flex justify-between items-start">
@@ -875,88 +837,71 @@ body {
             <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 text-[11px] font-semibold text-slate-700">
               <span class="text-poultry-red font-bold">MoFA Protocol:</span> ${d.action}
             </div>
-          </div>
-        `;
-      });
+          </div>`; 
+      }); 
+      diagnosticResults.innerHTML = htmlContent; 
+    } 
 
-      diagnosticResults.innerHTML = htmlContent;
-    }
+    symptomChecks.forEach(check => check.addEventListener('change', updateDiagnostics)); 
+    if (resetDiagnostics) { 
+      resetDiagnostics.addEventListener('click', () => { 
+        symptomChecks.forEach(c => c.checked = false); 
+        updateDiagnostics(); 
+      }); 
+    } 
 
-    symptomChecks.forEach(check => check.addEventListener('change', updateDiagnostics));
+    // 📱 WhatsApp Modal Logic
+    const modal = document.getElementById('whatsappModal'); 
+    const modalBox = modal ? modal.querySelector('.modal-box') : null; 
+    let currentTier = 'General Wholesale Order'; 
 
-    if (resetDiagnostics) {
-      resetDiagnostics.addEventListener('click', () => {
-        symptomChecks.forEach(c => c.checked = false);
-        updateDiagnostics();
-      });
-    }
+    function openOrderModal(tierName) { 
+      currentTier = tierName; 
+      const title = document.getElementById('modalTierTitle');
+      if (title) title.textContent = 'Tier: ' + tierName; 
+      if (modal) {
+        modal.classList.remove('hidden'); 
+        setTimeout(() => { 
+          modal.classList.remove('opacity-0'); 
+          if (modalBox) modalBox.classList.remove('scale-95'); 
+        }, 10); 
+      }
+    } 
 
-    // 📱 WHATSAPP MODAL POPUP LOGIC
-    const modal = document.getElementById('whatsappModal');
-    const modalBox = modal.querySelector('.modal-box');
-    let currentTier = 'General Wholesale Order';
+    function closeOrderModal() { 
+      if (modal) {
+        modal.classList.add('opacity-0'); 
+        if (modalBox) modalBox.classList.add('scale-95'); 
+        setTimeout(() => { modal.classList.add('hidden'); }, 300); 
+      }
+    } 
 
-    function openOrderModal(tierName) {
-      currentTier = tierName;
-      document.getElementById('modalTierTitle').textContent = 'Tier: ' + tierName;
-      modal.classList.remove('hidden');
-      setTimeout(() => {
-        modal.classList.remove('opacity-0');
-        modalBox.classList.remove('scale-95');
-      }, 10);
-    }
+    function sendWhatsAppOrder() { 
+      const buyerName = document.getElementById('modalBuyerName').value || 'Valued Customer'; 
+      const quantity = document.getElementById('modalQuantity').value || '100'; 
+      const date = document.getElementById('modalDate').value || 'As soon as possible'; 
+      const message = `Hello UG Legon Poultry Team! 👋%0A%0AI would like to place a broiler order:%0A• *Buyer Name:* ${encodeURIComponent(buyerName)}%0A• *Package Tier:* ${encodeURIComponent(currentTier)}%0A• *Quantity:* ${quantity} birds%0A• *Preferred Date:* ${date}%0A%0APlease confirm availability and MoMo deposit details.`; 
+      window.open(`https://wa.me/233541421164?text=${message}`, '_blank'); 
+      closeOrderModal(); 
+    } 
 
-    function closeOrderModal() {
-      modal.classList.add('opacity-0');
-      modalBox.classList.add('scale-95');
-      setTimeout(() => {
-        modal.classList.add('hidden');
-      }, 300);
-    }
-
-    function sendWhatsAppOrder() {
-      const buyerName = document.getElementById('modalBuyerName').value || 'Valued Customer';
-      const quantity = document.getElementById('modalQuantity').value || '100';
-      const date = document.getElementById('modalDate').value || 'As soon as possible';
-
-      const message = `Hello UG Legon Poultry Team! 👋%0A%0AI would like to place a broiler order:%0A• *Buyer Name:* ${encodeURIComponent(buyerName)}%0A• *Package Tier:* ${encodeURIComponent(currentTier)}%0A• *Quantity:* ${quantity} birds%0A• *Preferred Date:* ${date}%0A%0APlease confirm availability and MoMo deposit details.`;
-
-      window.open(`https://wa.me/233541421164?text=${message}`, '_blank');
-      closeOrderModal();
-    }
-  </script>
-
-  </script>
-  // 🔍 LIVE IN-PAGE SEARCH ENGINE
-    const searchInput = document.getElementById('siteSearchInput');
-
-    if (searchInput) {
-      searchInput.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase().trim();
-        
-        // Target cards across blog, diagnostics, and pricing
-        const searchableCards = document.querySelectorAll('#blog article, #pricing .animated-card, #gallery .animated-card');
-
-        searchableCards.forEach(card => {
-          const content = card.textContent.toLowerCase();
-          if (query === '' || content.includes(query)) {
-            card.style.display = ''; // Show card
-          } else {
-            card.style.display = 'none'; // Hide non-matching card
-          }
-        });
-      });
+    // 🔍 Live In-Page Search Engine
+    const searchInput = document.getElementById('siteSearchInput'); 
+    if (searchInput) { 
+      searchInput.addEventListener('input', (e) => { 
+        const query = e.target.value.toLowerCase().trim(); 
+        const searchableCards = document.querySelectorAll('#blog article, #pricing .animated-card, #gallery .animated-card'); 
+        searchableCards.forEach(card => { 
+          const content = card.textContent.toLowerCase(); 
+          if (query === '' || content.includes(query)) { 
+            card.style.display = ''; 
+          } else { 
+            card.style.display = 'none'; 
+          } 
+        }); 
+      }); 
     }
   </script>
-
-  <script type="text/javascript">
-    function googleTranslateElementInit() {
-      new google.translate.TranslateElement({
-        pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-      }, 'google_translate_element');
-    }
-  </script>
-  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
+  
