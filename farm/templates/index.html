@@ -39,6 +39,53 @@
     }
   </style>
 
+  /* 🚫 HIDE GOOGLE TRANSLATE TOP BANNER & IFRAME */
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+/* Fix body positioning when Google Translate loads */
+body {
+    top: 0px !important;
+    position: static !important;
+}
+
+/* 🚫 HIDE GOOGLE TOOLTIP & HIGHLIGHT OVERLAYS ON HOVER */
+#goog-gt-tt, 
+.goog-te-balloon-frame,
+.goog-tooltip,
+.goog-tooltip:hover {
+    display: none !important;
+}
+
+.goog-text-highlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 🎨 CLEAN UP TRANSLATE DROPDOWN LOOK */
+.goog-te-gadget {
+    color: transparent !important;
+    font-size: 0px !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+    background-color: #1e293b !important; /* Dark Slate */
+    color: #fcd34d !important;             /* Amber Text */
+    border: 1px solid #334155 !important;
+    border-radius: 0.375rem !important;
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    outline: none !important;
+}
+
+.goog-te-gadget span {
+    display: none !important;
+}
+
   <script>
     tailwind.config = {
       theme: {
@@ -56,23 +103,6 @@
       }
     }
   </script>
-
-  /* Hide Google Translate top banner & toolbar */
-.goog-te-banner-frame.skiptranslate,
-.goog-te-banner-frame {
-    display: none !important;
-}
-body {
-    top: 0px !important;
-}
-/* Hide the Google attribution tooltip on text hover */
-#goog-gt-tt, .goog-te-balloon-frame {
-    display: none !important;
-}
-.goog-text-highlight {
-    background: transparent !important;
-    box-shadow: none !important;
-}
 
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans antialiased">
