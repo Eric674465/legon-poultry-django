@@ -56,6 +56,24 @@
       }
     }
   </script>
+
+  /* Hide Google Translate top banner & toolbar */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame {
+    display: none !important;
+}
+body {
+    top: 0px !important;
+}
+/* Hide the Google attribution tooltip on text hover */
+#goog-gt-tt, .goog-te-balloon-frame {
+    display: none !important;
+}
+.goog-text-highlight {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
 </head>
 <body class="bg-slate-100 text-slate-800 font-sans antialiased">
 
