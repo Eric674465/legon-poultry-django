@@ -72,13 +72,7 @@
         <span>📍 UG Legon Campus, Accra</span>
         <span>📞 Sales: <strong>+233 24 XXX XXXX</strong></span>
 
-        <div class="relative inline-block text-left ml-2 border-l border-slate-700 pl-3">
-          <select id="languageSelector" onchange="changeLanguage(this.value)" class="bg-slate-800 text-amber-300 font-bold text-[11px] px-2.5 py-1 rounded-md border border-slate-700 focus:outline-none cursor-pointer">
-            <option value="en">🇬🇧 English</option>
-            <option value="tw">🇬🇭 Twi</option>
-            <option value="fr">🇫🇷 Français</option>
-          </select>
-        </div>
+        <div id="google_translate_element" class="text-xs bg-slate-800 rounded-lg px-2 py-0.5 border border-slate-700"></div>
       </div>
     </div>
   </div>
@@ -1159,6 +1153,17 @@
       });
     }
   </script>
+
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'en,tw,fr,ee,ha,es', // English, Twi, French, Ewe, Hausa, Spanish
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 </body>
 </html>
